@@ -3,62 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola</title>
+
+    <title>Chat de saludos</title>
 
     <style>
         body {
-            margin: 0;
-            height: 100vh;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-
+            background-color: #f2f2f2;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
         }
 
-        .contenedor {
+        .chat {
             background-color: white;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            width: 400px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
-            font-size: 50px;
-            color: #1e3a8a;
+            text-align: center;
+        }
+
+        #mensajes {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
         }
 
         button {
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 16px;
+            width: 25%;
+            padding: 10px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #1d4ed8;
+        .usuario {
+            text-align: right;
+            margin: 10px;
+        }
+
+        .bot {
+            text-align: left;
+            margin: 10px;
+            color: #2563eb;
         }
     </style>
 </head>
 
 <body>
 
-    <div class="contenedor">
-        <h1>Hola</h1>
-        <p id="mensaje">Bienvenido a mi página web</p>
+    <div class="chat">
 
-        <button onclick="saludar()">Saludar</button>
+        <h1>Chat</h1>
+
+        <div id="mensajes"></div>
+
+        <input type="text" id="entrada" placeholder="Escribe un saludo">
+
+        <button onclick="saludar()">Enviar</button>
+
     </div>
 
     <script>
+
         function saludar() {
-            document.getElementById("mensaje").textContent = "¡Hola! 👋";
+
+            let texto = document.getElementById("entrada").value;
+
+            if (texto != "") {
+
+                document.getElementById("mensajes").innerHTML +=
+                    "<div class='usuario'>" + texto + "</div>";
+
+                document.getElementById("mensajes").innerHTML +=
+                    "<div class='bot'>¡Hola! 👋</div>";
+
+                document.getElementById("entrada").value = "";
+            }
         }
+
     </script>
 
 </body>
