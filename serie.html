@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Obsidian Stream</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-surface-variant": "var(--on-surface-variant, #a1a1aa)",
+          "tertiary-container": "var(--tertiary-container, #065f46)",
+          "surface-container-highest": "var(--surface-container-highest, #1e1e22)",
+          "on-primary": "var(--on-primary, #0a0012)",
+          "secondary-container": "var(--secondary-container, #27272a)",
+          "surface-bright": "var(--surface-bright, #18181b)",
+          "primary-container": "var(--primary-container, #7c3aed)",
+          "secondary-fixed": "var(--secondary-fixed, #a1a1aa)",
+          "on-tertiary-fixed": "#003318",
+          "primary-fixed-dim": "#c4b5fd",
+          "on-tertiary-fixed-variant": "#047857",
+          "surface-container": "var(--surface-container, #121215)",
+          "on-tertiary": "#001a12",
+          "outline-variant": "var(--outline-variant, #27272a)",
+          "on-primary-container": "#ede9fe",
+          "on-secondary-fixed-variant": "#3f3f46",
+          "outline": "var(--outline, #52525b)",
+          "on-error-container": "#fca5a5",
+          "surface-container-lowest": "var(--surface-container-lowest, #09090b)",
+          "background": "var(--background, #09090b)",
+          "inverse-surface": "#fafafa",
+          "surface-container-low": "var(--surface-container-low, #0f0f12)",
+          "on-primary-fixed-variant": "#5b21b6",
+          "primary-fixed": "#ede9fe",
+          "surface-dim": "var(--surface-dim, #0c0c0f)",
+          "on-primary-fixed": "#2e1065",
+          "inverse-on-surface": "#09090b",
+          "surface-container-high": "var(--surface-container-high, #18181b)",
+          "inverse-primary": "#5b21b6",
+          "tertiary-fixed": "#bbf7d0",
+          "error": "#ef4444",
+          "tertiary": "#34d399",
+          "on-secondary": "#09090b",
+          "on-secondary-fixed": "#18181b",
+          "on-error": "#1a0000",
+          "on-background": "var(--on-background, #fafafa)",
+          "tertiary-fixed-dim": "#6ee7b7",
+          "secondary-fixed-dim": "#71717a",
+          "on-surface": "var(--on-surface, #fafafa)",
+          "on-tertiary-container": "#bbf7d0",
+          "primary": "#7c3aed",
+          "surface-tint": "#a78bfa",
+          "on-secondary-container": "#a1a1aa",
+          "surface": "var(--surface, #0c0c0f)",
+          "surface-variant": "var(--surface-variant, #18181b)",
+          "error-container": "#3b1111",
+          "secondary": "var(--secondary, #71717a)"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {},
+        "fontFamily": {
+          "headline": [
+            "Geist"
+          ],
+          "display": [
+            "Geist"
+          ],
+          "body": [
+            "Geist"
+          ],
+          "label": [
+            "Geist"
+          ]
+        },
+        "fontSize": {}
+      },
+    },
+  }</script><style>
+    :root {
+      --background: #09090b;
+      --surface: #0c0c0f;
+      --surface-container-lowest: #09090b;
+      --surface-container-low: #0f0f12;
+      --surface-container: #121215;
+      --surface-container-high: #18181b;
+      --surface-container-highest: #1e1e22;
+      --surface-variant: #18181b;
+      --surface-bright: #18181b;
+      --surface-dim: #0c0c0f;
+      --on-background: #fafafa;
+      --on-surface: #fafafa;
+      --on-surface-variant: #a1a1aa;
+      --outline-variant: #27272a;
+      --outline: #52525b;
+      --secondary: #71717a;
+      --secondary-container: #27272a;
+      --on-primary: #0a0012;
+      --hero-scrim-end: rgba(12, 12, 15, 0.95);
+      --hero-bg-brightness: 0.32;
+    }
+    html.light {
+      --background: #f8fafc;
+      --surface: #ffffff;
+      --surface-container-lowest: #f1f5f9;
+      --surface-container-low: #f8fafc;
+      --surface-container: #ffffff;
+      --surface-container-high: #f1f5f9;
+      --surface-container-highest: #e2e8f0;
+      --surface-variant: #e2e8f0;
+      --surface-bright: #ffffff;
+      --surface-dim: #e2e8f0;
+      --on-background: #0f172a;
+      --on-surface: #0f172a;
+      --on-surface-variant: #475569;
+      --outline-variant: #e2e8f0;
+      --outline: #cbd5e1;
+      --secondary: #64748b;
+      --secondary-container: #ede9fe;
+      --on-primary: #ffffff;
+      --hero-scrim-end: rgba(248, 250, 252, 0.96);
+      --hero-bg-brightness: 0.18;
+    }
+    html.light .bg-surface-container {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    html.light select option {
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+  </style></head>
+  <body class="bg-background font-body text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container transition-colors duration-200"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/85 backdrop-blur-md border-b border-outline-variant transition-colors duration-200"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4"><div class="flex items-center gap-6 lg:gap-8"><div class="flex items-center gap-3"><a class="flex items-center gap-2" href="../Inicio/inicio.html"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_12px_rgba(124,58,237,0.4)]"><span class="material-symbols-outlined text-on-primary text-[20px] font-bold">bolt</span></div><span class="font-headline font-bold text-sm tracking-tight text-on-surface">KURO<span class="text-primary">STREAM</span></span></a><button aria-label="Alternar modo claro / oscuro" class="w-8 h-8 flex items-center justify-center rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/60 focus:outline-none" id="theme-toggle-btn" title="Cambiar a Modo Claro" type="button"><span class="material-symbols-outlined text-[20px] transition-transform duration-300" id="theme-toggle-icon">light_mode</span></button></div><nav class="hidden xl:flex items-center gap-1 text-sm font-medium" data-active-classes="bg-surface-container-high text-on-surface font-semibold rounded-lg"><a aria-current="page" class="px-3 py-2 transition-colors bg-surface-container-high text-on-surface font-semibold rounded-lg" data-path="novedades" href="#">Novedades</a><a class="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="popular" href="#">Popular</a><a class="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="simulcast" href="#">Simulcast</a><div class="relative group"><button class="flex items-center gap-1.5 px-3 py-2 text-on-surface-variant group-hover:text-on-surface group-hover:bg-surface-container rounded-lg transition-colors focus:outline-none" type="button"><span class="">Categorías</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-on-surface group-hover:rotate-180 transition-transform duration-200">expand_more</span></button><div class="absolute top-full left-0 mt-2 w-[540px] p-4 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50"><div class="text-xs font-semibold uppercase tracking-wider text-secondary mb-3 px-2">Géneros Principales</div><div class="grid grid-cols-2 gap-2 mb-4"><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-accion" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">swords</span></div><div><div class="text-sm font-medium text-on-surface">Acción &amp; Aventura</div><div class="text-xs text-on-surface-variant">Shonen, peleas, epopeyas</div></div></a><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-shonen" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">local_fire_department</span></div><div><div class="text-sm font-medium text-on-surface">Shonen Progresivo</div><div class="text-xs text-on-surface-variant">Superación, torneos</div></div></a><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-drama" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">theater_comedy</span></div><div><div class="text-sm font-medium text-on-surface">Drama Psicológico</div><div class="text-xs text-on-surface-variant">Intriga, suspense, moral</div></div></a><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-fantasia" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">auto_awesome</span></div><div><div class="text-sm font-medium text-on-surface">Fantasía &amp; Isekai</div><div class="text-xs text-on-surface-variant">Mundos paralelos, magia</div></div></a><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-scifi" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">rocket_launch</span></div><div><div class="text-sm font-medium text-on-surface">Sci-Fi &amp; Mecha</div><div class="text-xs text-on-surface-variant">Cyberpunk, robots, futuro</div></div></a><a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" data-path="categorias-slice-of-life" href="#"><div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">coffee</span></div><div><div class="text-sm font-medium text-on-surface">Slice of Life</div><div class="text-xs text-on-surface-variant">Comedia cotidiana, relax</div></div></a></div><div class="border-t border-outline-variant pt-3 px-2 flex items-center justify-between"><span class="text-xs text-on-surface-variant">Etiquetas populares:</span><div class="flex gap-2"><span class="text-[11px] px-2 py-0.5 rounded bg-surface-container-highest text-primary font-mono">#Seinen</span><span class="text-[11px] px-2 py-0.5 rounded bg-surface-container-highest text-primary font-mono">#Retro90s</span><span class="text-[11px] px-2 py-0.5 rounded bg-surface-container-highest text-primary font-mono">#DarkFantasy</span></div></div></div></div><span class="text-outline-variant mx-1">|</span><a class="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="juego" href="#">Juego</a><a class="px-3 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="tienda" href="#">Tienda</a><div class="relative group"><button class="flex items-center gap-1.5 px-3 py-2 text-on-surface-variant group-hover:text-on-surface group-hover:bg-surface-container rounded-lg transition-colors focus:outline-none" type="button"><span class="">Noticias</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-on-surface group-hover:rotate-180 transition-transform duration-200">expand_more</span></button><div class="absolute top-full left-0 mt-2 w-[420px] p-4 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50"><div class="text-xs font-semibold uppercase tracking-wider text-secondary mb-3 px-2">Actualidad &amp; Comunicados</div><div class="space-y-2 mb-3"><a class="block p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors" data-path="noticias-articulos" href="#"><div class="flex items-center justify-between mb-1"><span class="text-xs text-tertiary font-mono font-medium">DESTACADO</span><span class="text-[11px] text-on-surface-variant">Hace 2h</span></div><div class="text-sm font-medium text-on-surface">Anuncio oficial de producciones de temporada otoño</div></a><a class="block p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors" data-path="noticias-prensa" href="#"><div class="flex items-center justify-between mb-1"><span class="text-xs text-primary font-mono font-medium">COMUNICADO</span><span class="text-[11px] text-on-surface-variant">Ayer</span></div><div class="text-sm font-medium text-on-surface">Actualización de servidores de baja latencia en Europa</div></a><a class="block p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors" data-path="noticias-calendario" href="#"><div class="flex items-center justify-between mb-1"><span class="text-xs text-on-surface-variant font-mono font-medium">CALENDARIO</span><span class="text-[11px] text-on-surface-variant">Esta semana</span></div><div class="text-sm font-medium text-on-surface">Horarios confirmados de emisión semanal de simulcasts</div></a></div><a class="text-xs text-primary hover:text-primary-fixed block text-center font-medium py-1" data-path="noticias-hub" href="../Listado/listado.html">Ver todas las publicaciones →</a></div></div></nav></div><div class="flex items-center gap-2 lg:gap-3"><div class="relative hidden sm:flex items-center"><div class="relative w-48 md:w-64"><a href="../Busqueda/busqueda.html"><input class="w-full pl-9 pr-3 py-1.5 text-xs bg-surface-container border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Buscar series, anime, creadores..." type="text"/></a><span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span></div></div><button class="sm:hidden w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Buscar" type="button"><span class="material-symbols-outlined text-[20px]">search</span></button><a class="flex items-center justify-center w-9 h-9 rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface hover:border-primary/40 transition-colors relative" data-path="mi-lista" href="../Listado/listado.html" title="Etiquetar series / Mi Lista"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container"></span></a><div class="relative group"><button aria-label="Menú de Usuario" class="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-container transition-colors focus:outline-none" type="button"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_8px_rgba(124,58,237,0.3)]"><span class="material-symbols-outlined text-white text-[18px]">person</span></div><span class="material-symbols-outlined text-on-surface-variant text-[16px] hidden sm:inline group-hover:rotate-180 transition-transform duration-200">expand_more</span></button><div class="absolute right-0 top-full mt-2 w-72 p-3 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50"><div class="flex items-center gap-3 p-2 mb-2 bg-surface-container-low rounded-lg border border-outline-variant/60"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-[20px]">person</span></div><div class="overflow-hidden"><div class="text-sm font-semibold text-on-surface truncate">Takeshi Kovacs</div><div class="text-xs text-tertiary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Plan Otaku Ultra (4K HDR)</div></div></div><div class="space-y-1 border-b border-outline-variant pb-2 mb-2"><a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" data-path="mi-cuenta" href="#"><span class="material-symbols-outlined text-[18px]">manage_accounts</span>Mi Cuenta</a><a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" data-path="perfiles" href="#"><span class="material-symbols-outlined text-[18px]">group</span>Perfiles</a><a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" data-path="historial" href="#"><span class="material-symbols-outlined text-[18px]">history</span>Historial de Reproducción</a><a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" data-path="ajustes" href="#"><span class="material-symbols-outlined text-[18px]">settings</span>Ajustes &amp; Calidad</a></div><div class="flex items-center justify-between px-3 py-2 mb-2 rounded-lg bg-surface-container-low"><div class="flex items-center gap-2 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">bedtime</span>Modo Noche</div><span class="text-[11px] font-mono uppercase bg-tertiary/20 text-tertiary px-2 py-0.5 rounded font-semibold" id="menu-theme-status">Activo</span></div><a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-error hover:bg-error-container/40 rounded-lg transition-colors" data-path="cerrar-sesion" href="#"><span class="material-symbols-outlined text-[18px]">logout</span>Cerrar Sesión</a></div></div></div></div></header><main class="w-full pt-16 bg-surface transition-colors duration-200"><div class="flex flex-col w-full">
+<!-- Top Hero Backdrop Area with Seamless Shell Bleed -->
+<section class="relative w-full overflow-hidden -mt-16 pt-20 pb-12 lg:pb-16 bg-surface-container-lowest transition-colors duration-200">
+<!-- Cinematic Full-Bleed Scrim & Key Art Background -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center filter brightness-[var(--hero-bg-brightness)] saturate-125 scale-105 transform transition-all duration-300" data-alt="Cinematic atmospheric dark fantasy anime key art showing an ancient celestial observatory bathed in violet auroras, glowing obsidian monoliths, misty cosmic fog, high contrast lighting, cinematic render, 8k wallpaper" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKx5Ih5WG8eMnQOId7000OtDYzlaeGoSF59OXfnAZJotl2muiLQjoPkvcyzsxZCe8zg3vAZsr3Kls3fEoIWEX3W6XhaQlZo0R5-4cNhucqiqPidsR4YfgBtte572tmPq-FG-ymH2_y2H3KADFRH8ViQHkZOW89no6UBwa5l4dNZyp-PEfvYGE6dDNqigVYgYhKUG9XtjYVIZxYL0Yf5pQGT_g5eWg-xPnrFPWWB6E");'>
+</div>
+<!-- Gradual Obsidian Scrims -->
+<div class="absolute inset-0 bg-gradient-to-t from-[var(--hero-scrim-end)] via-surface/85 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-transparent lg:w-3/4"></div>
+<div class="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-background/90 to-transparent"></div>
+</div>
+<!-- Main Series Hero Content Grid (Faithful to Sketch Top Half) -->
+<div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-6">
+<!-- Breadcrumb & Status Pill -->
+<div class="flex items-center gap-3 mb-6 text-xs text-on-surface-variant font-mono">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span class="">Catálogo</span>
+</a>
+<span class="">/</span>
+<span class="text-on-surface-variant">Simulcast</span>
+<span class="">/</span>
+<span class="text-on-surface">Aetheria: Crónicas del Vacío</span>
+<span class="ml-auto inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          EN EMISIÓN • SIMULCAST
+        </span>
+</div>
+<!-- Asymmetric Hero Columns: Left Poster + Center Overview + Right Metadata Panel -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Poster Key Art with Badges -->
+<div class="lg:col-span-3 flex flex-col items-center lg:items-start group">
+<div class="relative w-56 sm:w-64 lg:w-full aspect-[2/3] rounded-xl overflow-hidden shadow-2xl bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vertical dark anime poster of Aetheria: Chronicles of the Void. A cloaked silver-haired protagonist holding a crystalline katana facing an ominous violet celestial vortex in an obsidian temple ruin. Sharp neon accents, clean anime aesthetic, hyper-detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCvDry40gEZ_z0maHB0LKXpWzOjE35Djrz2TlD8PN2KIIp-bb4b_T1VlF7skqDxpzc8MO0jvaZkqdOduFwaswZWSaLk0W7e6T9530jmzTSA3WXWfFgX04VkGI19dlbmb_5izYc-ATDZbtEulm-0NSxdAWFXRZSES50xowuGEcp-xwByYW9OaMtBenrV7tIj6Ik2kn7Qj80DyVM6yYedzf76MWlk4O0qyZmQnPytdI"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md px-2.5 py-1 rounded-md text-[11px] font-bold text-primary tracking-wide">
+              TOP #1 HOY
+            </div>
+<div class="absolute bottom-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-mono text-tertiary font-bold">
+              4K HDR • 60FPS
+            </div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent opacity-60"></div>
+</div>
+<!-- Quick Audio Availability Badges below poster -->
+<div class="w-56 sm:w-64 lg:w-full mt-3 flex items-center justify-between px-3 py-2 bg-surface-container border border-outline-variant/50 rounded-lg text-xs text-on-surface-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">translate</span>
+              JAP • ESP • ENG
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-[16px]">closed_caption</span>
+              Subs ES / EN
+            </span>
+</div>
+</div>
+<!-- Center: Series Information, Stars, Synopsis, CTAs -->
+<div class="lg:col-span-6 flex flex-col space-y-4">
+<!-- Title & Japanese Subtitle -->
+<div>
+<span class="text-xs font-mono tracking-widest text-primary uppercase font-bold">Original KuroStream Series</span>
+<h1 class="text-3xl sm:text-4xl lg:text-5xl font-headline font-extrabold tracking-tight text-on-surface mt-1 leading-none">
+              Aetheria: Crónicas del Vacío
+            </h1>
+<div class="text-xs text-secondary font-mono tracking-wider mt-1">エーテリア：虚空の記録 (S2: Arc of the Rift)</div>
+</div>
+<!-- Ratings & Stats Bar (As requested in sketch: ★★★★★ | Info) -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs">
+<div class="flex items-center gap-1.5 bg-surface-container border border-outline-variant/60 px-2.5 py-1.5 rounded-lg">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-[17px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="material-symbols-outlined text-[17px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="material-symbols-outlined text-[17px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="material-symbols-outlined text-[17px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="material-symbols-outlined text-[17px]" style='font-variation-settings: "FILL" 1;'>star_half</span>
+</div>
+<span class="font-bold text-on-surface text-sm">9.6</span>
+<span class="text-on-surface-variant text-[11px]">(124.8k votos)</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono text-[11px]">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold">+16</span>
+<span class="">2025</span>
+<span class="">•</span>
+<span class="">2 Temporadas</span>
+<span class="">•</span>
+<span class="text-primary font-medium">Episodio 4 hoy</span>
+</div>
+</div>
+<!-- Genre Tags -->
+<div class="flex flex-wrap gap-2 pt-1">
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+              Fantasía Oscura
+            </span>
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+              Shonen Progresivo
+            </span>
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+              Psicológico &amp; Intriga
+            </span>
+<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-surface-container border border-outline-variant/60 text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer">
+              Acción Sobrenatural
+            </span>
+</div>
+<!-- Primary Actions (Playback Button + Auxiliary Icons) -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<!-- Big Play / Continue Button -->
+<button class="flex items-center gap-2.5 px-6 py-3 rounded-lg bg-primary text-white font-headline font-bold text-sm shadow-xl shadow-primary-container/20 hover:opacity-90 active:scale-95 transition-all" id="btn-play-primary" type="button">
+<span class="material-symbols-outlined text-[22px]" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+<span class="">Continuar T2:E4 "El Velo Fragmentado"</span>
+</button>
+<!-- Trailer Trigger -->
+<button class="flex items-center gap-2 px-4 py-3 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high text-on-surface font-medium text-sm transition-colors" id="btn-trailer" type="button">
+<span class="material-symbols-outlined text-[18px]">movie</span>
+<span class="">Tráiler Oficial</span>
+</button>
+<!-- Icon Actions: Bookmark, Like, Share -->
+<div class="flex items-center gap-1.5">
+<button class="w-11 h-11 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="btn-bookmark" title="Guardar en Mi Lista" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark_add</span>
+</button>
+<button class="w-11 h-11 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-rose-400 transition-colors" id="btn-like" title="Me Gusta" type="button">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<button class="w-11 h-11 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" id="btn-share" title="Compartir Serie" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+<!-- Full Synopsis -->
+<div class="pt-2">
+<h3 class="text-xs uppercase font-mono tracking-wider text-secondary mb-1.5">Sinopsis del Argumento</h3>
+<p class="text-sm leading-relaxed text-on-surface-variant text-pretty font-normal">
+              Tras la misteriosa caída de los Siete Sellos del Éter en las cumbres de Obsidian Gate, el joven esgrimista Kaelen descubre que su linaje está intrínsecamente ligado al Vórtice del Silencio. Ahora, acechado por los Heraldos de Ceniza y con el colapso inminente de la última ciudadela flotante, deberá dominar el fuego sombrío antes de que la grieta devore el plano material.
+            </p>
+</div>
+<!-- Mini Inline Sparkline / Trending Metric -->
+<div class="flex items-center gap-4 pt-1 text-xs text-secondary font-mono">
+<div class="flex items-center gap-1.5 text-tertiary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="">+34% horas vistas esta semana</span>
+</div>
+<span class="">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="">Simulcast todos los Domingos 17:30 UTC</span>
+</div>
+</div>
+</div>
+<!-- Right: Complementary Info Box (Credits, Studio, Specs as in Sketch) -->
+<div class="lg:col-span-3 flex flex-col gap-4">
+<div class="p-5 rounded-xl bg-surface-container border border-outline-variant/60 shadow-lg space-y-4">
+<h3 class="text-xs uppercase font-mono tracking-wider text-primary font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">info</span>
+              Ficha Técnica &amp; Cast
+            </h3>
+<div class="space-y-3 text-xs divide-y divide-transparent">
+<div>
+<span class="text-secondary block text-[11px] font-mono uppercase">Estudio de Animación</span>
+<span class="font-medium text-on-surface">Ufotable × KuroLabs Co-Prod</span>
+</div>
+<div class="pt-2">
+<span class="text-secondary block text-[11px] font-mono uppercase">Creador Original / Director</span>
+<span class="font-medium text-on-surface">Shinji Morimoto / Elena V. Kuro</span>
+</div>
+<div class="pt-2">
+<span class="text-secondary block text-[11px] font-mono uppercase">Banda Sonora Original</span>
+<span class="font-medium text-on-surface">Hiroyuki Sawano &amp; Kevin Penkin</span>
+</div>
+<div class="pt-2">
+<span class="text-secondary block text-[11px] font-mono uppercase">Reparto de Voces (Cast)</span>
+<p class="font-medium text-on-surface-variant leading-relaxed">
+                  Yuki Kaji (Kaelen), Sora Amamiya (Lyra), Takehito Koyasu (Lord Vane), Saori Hayami (Nox)
+                </p>
+</div>
+<div class="pt-2">
+<span class="text-secondary block text-[11px] font-mono uppercase">Formatos Disponibles</span>
+<div class="flex flex-wrap gap-1.5 mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[11px] font-mono text-on-surface">4K UHD</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[11px] font-mono text-on-surface">Dolby Vision</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-[11px] font-mono text-on-surface">Dolby Atmos 5.1</span>
+</div>
+</div>
+</div>
+<!-- Content Rating Advisory -->
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-outline-variant/60 text-[11px] text-on-surface-variant flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[16px] mt-0.5 shrink-0">verified_user</span>
+<span class="">Recomendado para mayores de 16 años. Contiene secuencias de acción intensa y violencia fantástica.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Lower Section: Episodes, Seasons & Carousel (Faithful to Sketch Lower Half) -->
+<section class="w-full bg-surface py-10 transition-colors duration-200">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Episode Controls Toolbar (Season Dropdown + Search + Sorting + Layout View Toggle) -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-4">
+<!-- Left Tool: Season Switcher Dropdown & Counter -->
+<div class="flex items-center gap-3">
+<div class="relative">
+<select class="appearance-none bg-surface-container-high border border-outline-variant/60 text-on-surface text-sm font-semibold pl-4 pr-10 py-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer shadow-sm" id="season-selector">
+<option selected="" value="s2">Temporada 2: El Velo del Abismo (8 episodios)</option>
+<option value="s1">Temporada 1: El Despertar del Éter (12 episodios)</option>
+<option value="ova">Especiales &amp; OVA: Memorias del Vacío (2 eps)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">
+              expand_more
+            </span>
+</div>
+<span class="text-xs text-secondary font-mono hidden sm:inline">8 de 12 emitidos</span>
+</div>
+<!-- Right Tool: Filters, Quick Search, Sort & Grid/List View Toggles -->
+<div class="flex items-center gap-2.5 flex-wrap">
+<!-- Search in episodes -->
+<div class="relative">
+<input class="w-40 sm:w-48 pl-8 pr-3 py-2 text-xs bg-surface-container border border-outline-variant/60 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary transition-all" id="episodes-search-input" placeholder="Buscar episodio..." type="text"/>
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">
+              search
+            </span>
+</div>
+<!-- Sort Order Dropdown -->
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high text-xs text-on-surface font-medium transition-colors" id="btn-sort-order" type="button">
+<span class="material-symbols-outlined text-[16px]">sort</span>
+<span class="hidden sm:inline">1 - 8 (Ascendente)</span>
+</button>
+<!-- View Switcher (List vs Grid as in sketch icons) -->
+<div class="flex items-center bg-surface-container border border-outline-variant/60 p-1 rounded-lg">
+<button class="p-1.5 rounded bg-surface-container-high text-primary shadow-xs" id="view-grid-btn" title="Vista Cuadrícula" type="button">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface transition-colors" id="view-list-btn" title="Vista Lista" type="button">
+<span class="material-symbols-outlined text-[18px]">view_agenda</span>
+</button>
+</div>
+<!-- Carousel Arrow Navigation -->
+<div class="flex items-center gap-1 pl-2">
+<button class="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors active:scale-95" id="carousel-prev" title="Anterior" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant/60 hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors active:scale-95" id="carousel-next" title="Siguiente" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Episode Grid / Carousel Container (Matching sketch's 5-column episode row) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-hidden" id="episodes-container">
+<!-- Card Episode 1 -->
+<div class="group relative flex flex-col bg-surface-container border border-outline-variant/60 rounded-xl overflow-hidden hover:bg-surface-container-high transition-all duration-200 shadow-sm hover:shadow-xl">
+<!-- 16:9 Thumbnail -->
+<div class="relative w-full aspect-video bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Anime episode still: Kaelen walking into the ruins of an astral citadel surrounded by floating crystal shards and purple mist in dark twilight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7MuXoIP2wWosBqYC1qmLJtSfC7UuTPDYOI7H7E6-NoCS68WOfJoVq4C106oEwbC0GVkkIDDirru5qNkoVglUP9RobHfbDukfumrSuPSBRyFdV4nJySMii6rqwHCmeJ--iMBoC-zvoty91XfzWSUAbt3KH0B0261tmoFI-dZ78wG3t1l8J1clwVgjt0s6fOwVhmlR0DAtTyVByfQtwshAivxxfWcwcRiVe0e5IK-w"/>
+<!-- Play Overlay on Hover -->
+<div class="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+</div>
+<!-- Duration Badge -->
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[10px] font-mono text-on-surface">
+              24:15
+            </div>
+<!-- Progress Bar (Finished 100%) -->
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+</div>
+<!-- Info Body -->
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary mb-1">
+<span class="">EPISODIO 1</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Completado
+              </span>
+</div>
+<h4 class="text-sm font-semibold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">
+              El Despertar del Sello
+            </h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1 leading-relaxed font-normal">
+              La expedición a las catacumbas de Obsidian despierta una entidad dormida durante milenios.
+            </p>
+<div class="mt-auto pt-3 flex items-center justify-between text-xs text-secondary border-t border-transparent">
+<span class="text-[11px]">12 Ene 2025</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Descargar Episodio" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Episode 2 -->
+<div class="group relative flex flex-col bg-surface-container border border-outline-variant/60 rounded-xl overflow-hidden hover:bg-surface-container-high transition-all duration-200 shadow-sm hover:shadow-xl">
+<div class="relative w-full aspect-video bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Anime episode still: Lyra chanting an incantation with her hands illuminating brilliant cyan runes against a starry obsidian backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsq_4N2eWq3nsGEMuIel4gg9FS02BIv6WSmwrBMwUURN_nUXLhvgi7v_aatzNpS3K3gbuMJUfXji2-9ALS1SnPLUc6KXJVOlR0Ioj4BUOVMGJuPSywtQ2OJ3Q964EpkuE7t31AlgMdJlXNQiD6KvxQh03lA5rmvxvmedYBw09EflTh6YF49ZeYT2UBpbs6PPRzRIOQdf1_oKrVQZGbyF5P4L9xdkNfqpRYHV42wDE"/>
+<div class="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[10px] font-mono text-on-surface">
+              23:50
+            </div>
+<!-- Progress Bar (Finished 100%) -->
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-tertiary w-full"></div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary mb-1">
+<span class="">EPISODIO 2</span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Completado
+              </span>
+</div>
+<h4 class="text-sm font-semibold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">
+              Ecos en la Espiral Astral
+            </h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1 leading-relaxed font-normal">
+              Lyra descifra las runas antiguas y guía a los supervivientes por los senderos nebulosos de la torre.
+            </p>
+<div class="mt-auto pt-3 flex items-center justify-between text-xs text-secondary">
+<span class="text-[11px]">19 Ene 2025</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Descargar Episodio" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Episode 3 -->
+<div class="group relative flex flex-col bg-surface-container border border-outline-variant/60 rounded-xl overflow-hidden hover:bg-surface-container-high transition-all duration-200 shadow-sm hover:shadow-xl">
+<div class="relative w-full aspect-video bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Anime episode still: Two warriors clashing blades in a rain of violet sparks over an obsidian bridge hovering in darkness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD98D5MTpQjAgVk1srsDdJhmYo5O96ciA3eVL73iyd3-bMPcfrSilddW0mR9yRwWmbcfPJrBOQDnCFMRPB8SijfvTkT3IRVlejBI-G_Y7I6nmCwkQzYERCHRHyfk9Shi7Mswfv3kZ4bGX5LNdwILt8n2Nu3Kr5lfXV61OKBy3ZsQLCBVa2gFWPbIBChMPC6CfAsGBU3ijOeJR9wMJ3aKcZGrRSgR2YmReWAhyWZru8"/>
+<div class="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[10px] font-mono text-on-surface">
+              24:40
+            </div>
+<!-- Progress Bar (Halfway watched 65%) -->
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary mb-1">
+<span class="">EPISODIO 3</span>
+<span class="text-primary font-semibold">Viendo (16m)</span>
+</div>
+<h4 class="text-sm font-semibold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">
+              Pacto de la Espada Negra
+            </h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1 leading-relaxed font-normal">
+              Lord Vane intercepta el convoy imperial. Un sacrificio inesperado sacude la lealtad del gremio.
+            </p>
+<div class="mt-auto pt-3 flex items-center justify-between text-xs text-secondary">
+<span class="text-[11px]">26 Ene 2025</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Descargar Episodio" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Episode 4 (Current / Highlighted) -->
+<div class="group relative flex flex-col bg-surface-container rounded-xl overflow-hidden hover:bg-surface-container-high transition-all duration-200 shadow-sm hover:shadow-xl ring-2 ring-primary">
+<div class="relative w-full aspect-video bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Anime episode still: Dramatic close up of Kaelen with eyes glowing violet amidst shattering dimensional glass, cinematic dramatic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASLzg0gaM76ygJSE2MUOU-wUigigz5zgaj2mtKP7coUdnbXgvaMwalS4utXw2kPLU58IzPKxx-Cu1eKgtWdjwOnh3c-Oqb0kTUMWRljgfC-X2w646Me-MdmjYRVh-s9Pfy43kCi8Ww3sJLwCrj9SVhVwxOHJjyB_y62Al60574dJTKJ9LEKvs_-cS3FjVjdf83au0l9-FzgtGZDIhaCQkTla1Sv-LiAAFny6o755M"/>
+<div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-primary text-[10px] font-bold text-white">
+              NUEVO EPISODIO
+            </div>
+<div class="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[24px]" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[10px] font-mono text-on-surface">
+              25:10
+            </div>
+<div class="absolute bottom-0 inset-x-0 h-1 bg-surface-container-highest">
+<div class="h-full bg-primary w-0"></div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary mb-1">
+<span class="text-primary font-bold">EPISODIO 4</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-tertiary">ESTRENO</span>
+</div>
+<h4 class="text-sm font-semibold text-on-surface line-clamp-1 group-hover:text-primary transition-colors">
+              El Velo Fragmentado
+            </h4>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1 leading-relaxed font-normal">
+              La barrera de protección entre planos cede por completo. Kaelen debe tomar una decisión irreversible.
+            </p>
+<div class="mt-auto pt-3 flex items-center justify-between text-xs text-secondary">
+<span class="text-[11px]">Hoy, 02 Feb</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Descargar Episodio" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card Episode 5 (Upcoming) -->
+<div class="group relative flex flex-col bg-surface-container border border-outline-variant/60 rounded-xl overflow-hidden hover:bg-surface-container-high transition-all duration-200 shadow-sm opacity-90">
+<div class="relative w-full aspect-video bg-surface-container-lowest overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover filter blur-[2px] scale-105" data-alt="Anime teaser silhouette: A dark gargantuan leviathan awakening under a turbulent purple vortex in space, mystery anime teaser." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl6dd7lyxFHt67bYOqlYNBPSbV8YJv7W_9WyeYJi9BywL19MxRGtS0JuV6yi4ppZLmllZUSbO1FMWmP99wgJnYnCLNQjmCNuCZroUskF1v_OjNH3_p-hYjcScYxIN1BiuevN_7zNk2h9Is4KwyPGFiQNOx-9c133Ew864L5EKIxEVgKeovciXtHDfYDuXaTEJFKltCTCJZoK19aLz-aGi_3ge3yOsmEU1VrYGvS54"/>
+<div class="absolute inset-0 bg-background/60 flex flex-col items-center justify-center text-center p-3">
+<span class="material-symbols-outlined text-secondary text-[26px]">lock_clock</span>
+<span class="text-[11px] font-mono text-on-surface font-semibold mt-1">Domingo 9 Feb, 17:30</span>
+</div>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-surface-container-lowest/80 text-[10px] font-mono text-on-surface-variant">
+              ~24:00
+            </div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary mb-1">
+<span class="">EPISODIO 5</span>
+<span class="text-[10px] text-on-surface-variant">Próximamente</span>
+</div>
+<h4 class="text-sm font-semibold text-on-surface-variant line-clamp-1">
+              El Despertar del Leviatán
+            </h4>
+<p class="text-xs text-secondary line-clamp-2 mt-1 leading-relaxed font-normal">
+              La silueta del devorador de reinos emerge en el horizonte celeste de la corte astral.
+            </p>
+<div class="mt-auto pt-3 flex items-center justify-between text-xs text-secondary">
+<span class="text-[11px]">En 7 días</span>
+<span class="material-symbols-outlined text-secondary text-[16px]">notifications_none</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Seasons / Content Notice -->
+<div class="mt-8 p-4 rounded-xl bg-surface-container border border-outline-variant/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div>
+<div class="text-xs font-semibold text-on-surface">Calendario de Emisión Simulcast</div>
+<div class="text-[11px] text-on-surface-variant">Episodio 5 disponible en transmisión simultánea con Japón el 9 de febrero de 2025.</div>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-surface-container-high border border-outline-variant/60 hover:bg-surface-container-highest text-xs font-medium text-on-surface transition-colors flex items-center gap-1.5 shrink-0" id="btn-reminder" type="button">
+<span class="material-symbols-outlined text-[16px]">notifications_active</span>
+<span class="">Activar Recordatorio</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript Handling for Theme & Micro-interactions -->
+<script>
+    (function() {
+      // Functional Interactive Theme Toggle (Dark / Light)
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+      const themeToggleIcon = document.getElementById('theme-toggle-icon');
+      const menuThemeStatus = document.getElementById('menu-theme-status');
+
+      function updateThemeUI(isDark) {
+        if (isDark) {
+          htmlEl.classList.remove('light');
+          htmlEl.classList.add('dark');
+          if (themeToggleIcon) themeToggleIcon.textContent = 'light_mode';
+          if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('title', 'Cambiar a Modo Claro');
+            themeToggleBtn.setAttribute('aria-label', 'Cambiar a Modo Claro');
+          }
+          if (menuThemeStatus) {
+            menuThemeStatus.textContent = 'Activo';
+            menuThemeStatus.className = 'text-[11px] font-mono uppercase bg-tertiary/20 text-tertiary px-2 py-0.5 rounded font-semibold';
+          }
+        } else {
+          htmlEl.classList.remove('dark');
+          htmlEl.classList.add('light');
+          if (themeToggleIcon) themeToggleIcon.textContent = 'dark_mode';
+          if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('title', 'Cambiar a Modo Oscuro');
+            themeToggleBtn.setAttribute('aria-label', 'Cambiar a Modo Oscuro');
+          }
+          if (menuThemeStatus) {
+            menuThemeStatus.textContent = 'Inactivo';
+            menuThemeStatus.className = 'text-[11px] font-mono uppercase bg-secondary/20 text-secondary px-2 py-0.5 rounded font-semibold';
+          }
+        }
+      }
+
+      function toggleTheme() {
+        const isDarkNow = htmlEl.classList.contains('dark');
+        const nextThemeIsDark = !isDarkNow;
+        updateThemeUI(nextThemeIsDark);
+        try {
+          localStorage.setItem('kurostream-theme', nextThemeIsDark ? 'dark' : 'light');
+        } catch (e) {}
+      }
+
+      // Initialize based on saved preference or default to dark
+      try {
+        const savedTheme = localStorage.getItem('kurostream-theme');
+        if (savedTheme === 'light') {
+          updateThemeUI(false);
+        } else {
+          updateThemeUI(true);
+        }
+      } catch (e) {
+        updateThemeUI(true);
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          toggleTheme();
+        });
+      }
+
+      // Toggle Like state
+      const likeBtn = document.getElementById('btn-like');
+      if (likeBtn) {
+        likeBtn.addEventListener('click', function() {
+          const icon = this.querySelector('.material-symbols-outlined');
+          if (icon.innerText === 'favorite') {
+            icon.innerText = 'favorite_border';
+            this.classList.remove('text-rose-400');
+          } else {
+            icon.innerText = 'favorite';
+            this.classList.add('text-rose-400');
+            icon.style.fontVariationSettings = "'FILL' 1";
+          }
+        });
+      }
+
+      // Toggle Bookmark state
+      const bookmarkBtn = document.getElementById('btn-bookmark');
+      if (bookmarkBtn) {
+        bookmarkBtn.addEventListener('click', function() {
+          const icon = this.querySelector('.material-symbols-outlined');
+          if (icon.innerText === 'bookmark_add') {
+            icon.innerText = 'bookmark_added';
+            this.classList.add('text-primary');
+          } else {
+            icon.innerText = 'bookmark_add';
+            this.classList.remove('text-primary');
+          }
+        });
+      }
+
+      // View Layout Toggle (Grid vs List)
+      const gridBtn = document.getElementById('view-grid-btn');
+      const listBtn = document.getElementById('view-list-btn');
+      const container = document.getElementById('episodes-container');
+
+      if (gridBtn && listBtn && container) {
+        listBtn.addEventListener('click', function() {
+          container.className = 'flex flex-col gap-3';
+          gridBtn.className = 'p-1.5 rounded text-on-surface-variant hover:text-on-surface transition-colors';
+          listBtn.className = 'p-1.5 rounded bg-surface-container-high text-primary shadow-xs';
+        });
+
+        gridBtn.addEventListener('click', function() {
+          container.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 overflow-hidden';
+          gridBtn.className = 'p-1.5 rounded bg-surface-container-high text-primary shadow-xs';
+          listBtn.className = 'p-1.5 rounded text-on-surface-variant hover:text-on-surface transition-colors';
+        });
+      }
+
+      // Quick Search Filter for Episode Titles
+      const searchInput = document.getElementById('episodes-search-input');
+      if (searchInput && container) {
+        searchInput.addEventListener('input', function(e) {
+          const term = e.target.value.toLowerCase().trim();
+          const cards = container.children;
+          for (let card of cards) {
+            const title = card.querySelector('h4')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+            if (title.includes(term) || desc.includes(term)) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      }
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-low border-t border-outline-variant py-12 transition-colors duration-200"><div class="max-w-7xl mx-auto px-6 lg:px-12"><div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10"><div class="col-span-2"><div class="flex items-center gap-2 mb-3"><div class="w-6 h-6 rounded-md bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-white text-[16px]">bolt</span></div><span class="font-headline font-bold text-sm tracking-tight text-on-surface">KURO<span class="text-primary">STREAM</span></span></div><p class="text-xs text-on-surface-variant max-w-sm leading-relaxed mb-4">Plataforma de alta fidelidad para streaming de series de televisión, anime simultáneo y novedades globales sin publicidad abusiva.</p><div class="text-xs text-secondary font-mono">© 2024 KuroStream Labs Inc. Todos los derechos reservados.</div></div><div><div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Navegación</div><ul class="space-y-2 text-xs text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" data-path="novedades" href="#">Novedades</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="popular" href="#">Popular</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="simulcast" href="#">Simulcast</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="mi-lista" href="#">Mi Lista de Favoritos</a></li></ul></div><div><div><div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Explorar</div><ul class="space-y-2 text-xs text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" data-path="juego" href="#">Juegos Web</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="tienda" href="#">Tienda Oficial</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="noticias-articulos" href="#">Noticias &amp; Prensa</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="noticias-calendario" href="#">Calendario de Estrenos</a></li></ul></div></div><div><div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Legal &amp; Ayuda</div><ul class="space-y-2 text-xs text-on-surface-variant"><li class=""><a class="hover:text-on-surface transition-colors" data-path="terminos" href="#">Términos de Servicio</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="privacidad" href="#">Política de Privacidad</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="soporte" href="#">Centro de Ayuda</a></li><li class=""><a class="hover:text-on-surface transition-colors" data-path="contacto" href="#">Contacto Comercial</a></li></ul></div></div><div class="border-t border-outline-variant pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-secondary"><div class="">Diseñado para amantes de la animación japonesa y cine de culto. Transmisión nativa H.265 / AV1.</div><div class="flex items-center gap-4"><span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary"></span>Servidores Operativos 99.98%</span></div></div></div></footer>
+</body></html>

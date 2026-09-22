@@ -1,0 +1,1040 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>KuroStream - Descubrir Series y Anime</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary": "#0a0012",
+            "surface-container-highest": "#1e1e22",
+            "surface-container-low": "#0f0f12",
+            "on-tertiary": "#001a12",
+            "secondary-container": "#27272a",
+            "on-error": "#1a0000",
+            "surface-variant": "#18181b",
+            "tertiary-container": "#065f46",
+            "surface-tint": "#a78bfa",
+            "primary": "#a78bfa",
+            "tertiary-fixed-dim": "#6ee7b7",
+            "surface-bright": "#18181b",
+            "on-secondary-fixed": "#18181b",
+            "on-secondary-fixed-variant": "#3f3f46",
+            "on-background": "#fafafa",
+            "on-error-container": "#fca5a5",
+            "background": "#09090b",
+            "on-secondary": "#09090b",
+            "surface-container-high": "#18181b",
+            "surface": "#0c0c0f",
+            "outline": "#52525b",
+            "error": "#ef4444",
+            "on-primary-container": "#ede9fe",
+            "error-container": "#3b1111",
+            "on-surface-variant": "#a1a1aa",
+            "on-surface": "#fafafa",
+            "on-secondary-container": "#a1a1aa",
+            "on-primary-fixed-variant": "#5b21b6",
+            "primary-fixed-dim": "#c4b5fd",
+            "outline-variant": "#27272a",
+            "secondary-fixed-dim": "#71717a",
+            "surface-container": "#121215",
+            "on-primary-fixed": "#2e1065",
+            "on-tertiary-container": "#bbf7d0",
+            "on-tertiary-fixed": "#003318",
+            "secondary-fixed": "#a1a1aa",
+            "on-tertiary-fixed-variant": "#047857",
+            "tertiary-fixed": "#bbf7d0",
+            "inverse-primary": "#5b21b6",
+            "inverse-on-surface": "#09090b",
+            "primary-fixed": "#ede9fe",
+            "tertiary": "#34d399",
+            "secondary": "#71717a",
+            "inverse-surface": "#fafafa",
+            "primary-container": "#7c3aed",
+            "surface-container-lowest": "#09090b",
+            "surface-dim": "#0c0c0f"
+          },
+          fontFamily: {
+            headline: ["Geist", "sans-serif"],
+            display: ["Geist", "sans-serif"],
+            body: ["Geist", "sans-serif"],
+            label: ["Geist", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    html, body {
+      background-color: #09090b;
+      color: #fafafa;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Modo Claro explícito */
+    html:not(.dark),
+    html:not(.dark) body {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    html:not(.dark) header {
+      background-color: rgba(255, 255, 255, 0.88) !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) main {
+      background-color: #f8fafc !important;
+    }
+    html:not(.dark) footer {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .bg-surface-container {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+    }
+    html:not(.dark) .bg-surface-container:hover {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) .bg-surface-container-high {
+      background-color: #f1f5f9 !important;
+    }
+    html:not(.dark) .bg-surface-container-highest {
+      background-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .bg-surface-container-low {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .bg-surface-container-lowest {
+      background-color: #ffffff !important;
+    }
+    html:not(.dark) .text-on-surface {
+      color: #0f172a !important;
+    }
+    html:not(.dark) .text-on-surface-variant {
+      color: #475569 !important;
+    }
+    html:not(.dark) .border-outline-variant {
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .text-secondary {
+      color: #64748b !important;
+    }
+    html:not(.dark) #hero-gradient-overlay {
+      background: linear-gradient(to top, #f8fafc 0%, rgba(248, 250, 252, 0.85) 45%, rgba(248, 250, 252, 0.25) 100%) !important;
+    }
+    html:not(.dark) #hero-gradient-side {
+      background: linear-gradient(to right, #f8fafc 0%, rgba(248, 250, 252, 0.92) 55%, transparent 100%) !important;
+    }
+  </style>
+</head>
+<body class="bg-background font-body text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
+<!-- ==================== HEADER DE NAVEGACIÓN ==================== -->
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-[#0c0c0f]/90 backdrop-blur-md border-b border-outline-variant transition-colors duration-300">
+<div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 sm:gap-6 lg:gap-8">
+<!-- Logo Principal con botón selector de tema id="theme-toggle-btn" -->
+<div class="flex items-center gap-2"><a class="flex items-center gap-2 cursor-pointer focus:outline-none" href="#" title="KuroStream Inicio"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(167,139,250,0.45)]"><span class="material-symbols-outlined text-on-primary text-[20px] font-bold">bolt</span></div><span class="font-headline font-extrabold text-base tracking-tight text-on-surface">KURO<span class="text-primary">STREAM</span></span></a></div>
+<button aria-label="Alternar tema claro / oscuro" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40 border border-outline-variant/60" id="theme-toggle-btn" title="Cambiar a modo claro" type="button">
+<svg class="w-5 h-5 transition-transform duration-300 hover:rotate-45" fill="none" id="theme-icon-sun" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+<svg class="w-5 h-5 transition-transform duration-300 hover:-rotate-12 hidden" fill="none" id="theme-icon-moon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+</button>
+<!-- Menú de Enlaces -->
+<nav class="hidden xl:flex items-center gap-1 text-sm font-medium">
+<a class="px-3.5 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-semibold transition-colors" data-path="novedades" href="#">Novedades</a>
+<a class="px-3.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="popular" href="#">Popular</a>
+<a class="px-3.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" data-path="simulcast" href="#">Simulcast</a>
+<div class="relative group">
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 text-on-surface-variant group-hover:text-on-surface group-hover:bg-surface-container rounded-lg transition-colors focus:outline-none" type="button">
+<span class="">Categorías</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:rotate-180 transition-transform duration-200">expand_more</span>
+</button>
+<div class="absolute top-full left-0 mt-2 w-[540px] p-4 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+<div class="text-xs font-semibold uppercase tracking-wider text-secondary mb-3 px-2">Géneros Principales</div>
+<div class="grid grid-cols-2 gap-2 mb-4">
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">swords</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Acción &amp; Aventura</div>
+<div class="text-xs text-on-surface-variant">Shonen, peleas, epopeyas</div>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Shonen Progresivo</div>
+<div class="text-xs text-on-surface-variant">Superación, torneos</div>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">theater_comedy</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Drama Psicológico</div>
+<div class="text-xs text-on-surface-variant">Intriga, suspense, moral</div>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Fantasía &amp; Isekai</div>
+<div class="text-xs text-on-surface-variant">Mundos paralelos, magia</div>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Sci-Fi &amp; Mecha</div>
+<div class="text-xs text-on-surface-variant">Cyberpunk, robots, futuro</div>
+</div>
+</a>
+<a class="flex items-center gap-3 p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors group/item" href="#">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">coffee</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Slice of Life</div>
+<div class="text-xs text-on-surface-variant">Comedia cotidiana, relax</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+<span class="text-outline-variant mx-1">|</span>
+<a class="px-3.5 py-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="juego" href="#">Juego</a>
+<a class="px-3.5 py-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" data-path="tienda" href="#">Tienda</a>
+<div class="relative group">
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 text-on-surface-variant group-hover:text-on-surface group-hover:bg-surface-container rounded-lg transition-colors focus:outline-none" type="button">
+<span class="">Noticias</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:rotate-180 transition-transform duration-200">expand_more</span>
+</button>
+<div class="absolute top-full left-0 mt-2 w-[400px] p-4 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+<div class="text-xs font-semibold uppercase tracking-wider text-secondary mb-3 px-2">Actualidad &amp; Comunicados</div>
+<div class="space-y-2 mb-3">
+<a class="block p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors" href="#">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs text-tertiary font-mono font-medium">DESTACADO</span>
+<span class="text-[11px] text-on-surface-variant">Hace 2h</span>
+</div>
+<div class="text-sm font-medium text-on-surface">Anuncio oficial de producciones de temporada otoño</div>
+</a>
+<a class="block p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high border border-outline-variant/60 transition-colors" href="#">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs text-primary font-mono font-medium">COMUNICADO</span>
+<span class="text-[11px] text-on-surface-variant">Ayer</span>
+</div>
+<div class="text-sm font-medium text-on-surface">Actualización de servidores de baja latencia en Europa</div>
+</a>
+</div>
+<a class="text-xs text-primary hover:underline block text-center font-medium py-1" href="#">Ver todas las publicaciones →</a>
+</div>
+</div>
+</nav>
+</div>
+<!-- Barra de Búsqueda y Avatar -->
+<div class="flex items-center gap-3">
+<div class="relative hidden sm:flex items-center">
+<div class="relative w-56 md:w-64">
+<a href="../Busqueda/busqueda.html"><input class="w-full pl-9 pr-3 py-1.5 text-xs bg-surface-container border border-outline-variant rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Buscar series, anime, creadores..." type="text">
+</a><span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+</div>
+</div>
+<a class="flex items-center justify-center w-9 h-9 rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface hover:border-primary/40 transition-colors relative" href="../Listado/listado.html" title="Mi Lista">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container"></span>
+</a>
+<!-- Avatar Usuario -->
+<div class="relative group">
+<button aria-label="Menú de Usuario" class="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-container transition-colors focus:outline-none" type="button">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(167,139,250,0.35)]">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] hidden sm:inline group-hover:rotate-180 transition-transform duration-200">expand_more</span>
+</button>
+<div class="absolute right-0 top-full mt-2 w-72 p-3 bg-surface-container border border-outline-variant rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+<div class="flex items-center gap-3 p-2 mb-2 bg-surface-container-low rounded-lg border border-outline-variant/60">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[20px]">person</span>
+</div>
+<div class="overflow-hidden">
+<div class="text-sm font-semibold text-on-surface truncate">Takeshi Kovacs</div>
+<div class="text-xs text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Plan Otaku Ultra (4K HDR)
+                </div>
+</div>
+</div>
+<div class="space-y-1 border-b border-outline-variant pb-2 mb-2">
+<a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">manage_accounts</span>Mi Cuenta</a>
+<a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">history</span>Historial de Reproducción</a>
+<a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">settings</span>Ajustes &amp; Calidad</a>
+</div>
+<a class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-error hover:bg-error-container/40 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined text-[18px]">logout</span>Cerrar Sesión</a>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+<main class="w-full pt-16 bg-surface flex-1 transition-colors duration-300">
+<div class="flex flex-col w-full text-on-surface overflow-x-hidden">
+<!-- HERO SECTION IMPONENTE: SOMBRA DE NEO-KYOTO -->
+<section class="relative w-full -mt-16 overflow-hidden min-h-[680px] lg:min-h-[820px] flex items-end">
+<!-- Fondo cinematográfico anime cyberpunk oscuro -->
+<div class="absolute inset-0 w-full h-full" id="hero-slider">
+<div class="absolute inset-0 bg-cover bg-center scale-105" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCH2v7WUNknXK4MX5bRyxkbGcLUy1ELGQ3QpIToQd4ADrZtUwtRQkVGYw7Faw9fbsqZDg5zK7lFzoYm5PW2mgdZ-WXMzP_O188Ic8CXGYWsV1a6CYWzIrg0DEcamfyw5-5_d8EZ6i8n4yCGRzyOkyJTrhgNn2d70UczZ0uL4055piVHeS1BKwK1qMev4RGXQ-OiPQFN_G1LzRKr4JmNUNHX8WW8NKHjcDDnG-_QPtY&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/65 to-surface/40" id="hero-gradient-overlay"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/85 to-transparent w-full lg:w-3/4" id="hero-gradient-side"></div>
+</div>
+<!-- Controles laterales -->
+<button aria-label="Anterior diapositiva" class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface hover:text-primary flex items-center justify-center backdrop-blur-md shadow-xl transition-all hover:scale-110 active:scale-95 focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[28px]">chevron_left</span>
+</button>
+<button aria-label="Siguiente diapositiva" class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface hover:text-primary flex items-center justify-center backdrop-blur-md shadow-xl transition-all hover:scale-110 active:scale-95 focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[28px]">chevron_right</span>
+</button>
+<!-- Contenido Hero -->
+<div class="relative z-20 max-w-7xl w-full mx-auto px-6 lg:px-12 pt-28 pb-14 flex flex-col justify-end">
+<div class="flex flex-wrap items-center gap-3 mb-3">
+<span class="px-2.5 py-1 rounded bg-primary-container text-on-primary font-headline text-xs font-bold tracking-wider uppercase shadow-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+              Simulcast Exclusivo
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary text-xs font-mono font-medium flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+              Nuevo Episodio Hoy
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-xs font-mono">
+              4K HDR • 5.1 DOLBY
+            </span>
+</div>
+<h1 class="text-4xl sm:text-5xl lg:text-7xl font-headline font-extrabold tracking-tight text-on-surface max-w-3xl leading-[1.05] drop-shadow-lg mb-4">
+            Aetheria: Crónicas del Vacío
+          </h1>
+<div class="flex flex-wrap items-center gap-4 text-xs md:text-sm text-on-surface-variant font-medium mb-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span>
+<span class="text-on-surface font-bold">9.6</span>
+<span class="text-secondary text-xs">(38.4k valoraciones)</span>
+</div>
+<span class="text-secondary">•</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface text-xs font-semibold">+16</span>
+<span class="text-secondary">•</span>
+<span class="text-on-surface">Temporada 2</span>
+<span class="text-secondary">•</span>
+<span class="text-tertiary font-semibold">Episodio 18 Disponible</span>
+<span class="text-secondary">•</span>
+<span class="text-on-surface-variant">Sci-Fi, Cyberpunk, Acción Psicológica</span>
+</div>
+<p class="text-sm md:text-base text-on-surface-variant max-w-2xl leading-relaxed mb-8">
+Tras la misteriosa caída de los Siete Sellos del Éter en las cumbres de Obsidian Gate, el joven esgrimista Kaelen descubre que su linaje está intrínsecamente ligado al Vórtice del Silencio. Ahora, acechado por los Heraldos de Ceniza y con el colapso inminente de la última ciudadela flotante, deberá dominar el fuego sombrío antes de que la grieta devore el plano material.
+
+          </p>
+<!-- Botones de Acción Solicitados -->
+<div class="flex flex-wrap items-center gap-3.5 mb-10">
+<!-- Botón de Reproducción Principal con navegación al detalle -->
+<a href="../Serie/serie.html"><button class="px-6 py-3 rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-headline font-bold text-sm tracking-wide flex items-center gap-2.5 shadow-lg shadow-primary-container/30 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer focus:outline-none" onclick="if(window.parent){window.parent.postMessage({type: 'navigate', screen: 'Detalle de Serie - Plataforma de Series'}, '*');}" type="button">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+<span class="">Reproducir T2 : E18</span>
+</button></a>
+<!-- Botón Añadir a Mi Lista -->
+<a  href="../Listado/listado.html"><button class="px-4 py-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-2 shadow-md transition-colors group cursor-pointer focus:outline-none" type="button">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform text-[20px]">bookmark_add</span>
+<span class="">Añadir a mi lista</span>
+</button></a>
+<!-- Botón Ver Tráiler -->
+<button class="px-4 py-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-sm font-semibold flex items-center gap-2 shadow-md transition-colors group cursor-pointer focus:outline-none" type="button">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[20px]">movie</span>
+<span class="">Ver Tráiler</span>
+</button>
+<!-- Ficha Técnica -->
+<button class="w-11 h-11 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center shadow-md transition-colors cursor-pointer" title="Ficha Técnica Completa" type="button">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</button>
+</div>
+<!-- Indicadores del Hero -->
+<div class="flex items-center gap-2 pt-2">
+<span class="w-8 h-1.5 rounded-full bg-primary transition-all"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-container-highest transition-all"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-container-highest transition-all"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-container-highest transition-all"></span>
+<span class="text-xs font-mono text-secondary ml-3 tracking-wider">01 / 04</span>
+</div>
+</div>
+</section>
+<!-- ==================== FILTROS DE CATEGORÍAS (PILLS) ==================== -->
+<div class="max-w-7xl w-full mx-auto px-6 lg:px-12 py-6 -mt-2 z-20">
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs">
+<span class="text-secondary font-mono uppercase tracking-wider mr-2 shrink-0">Filtrar por:</span>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-semibold shadow-sm shrink-0 focus:outline-none">Todo</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Simulcast en emisión</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Top Clasificación</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Doblaje Castellano</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Completadas</button>
+<button class="px-3.5 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors shrink-0">Películas &amp; OVAS</button>
+<div class="ml-auto flex items-center gap-2 shrink-0 pl-4">
+<span class="text-xs text-on-surface-variant">Modo rejilla</span>
+<button class="w-7 h-7 rounded bg-surface-container flex items-center justify-center text-primary" title="Vista estándar">
+<span class="material-symbols-outlined text-[16px]">view_carousel</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ==================== SECCIONES DE CONTENIDO ==================== -->
+<div class="max-w-7xl w-full mx-auto px-6 lg:px-12 space-y-12 pb-24">
+<!-- SECCIÓN 1: TENDENCIAS DE LA SEMANA -->
+<section class="space-y-4">
+<div class="flex items-end justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">local_fire_department</span>
+<h2 class="text-xl lg:text-2xl font-headline font-bold tracking-tight text-on-surface">Tendencias de la Semana</h2>
+</div>
+<p class="text-xs text-on-surface-variant mt-0.5">Las producciones más reproducidas en tiempo real por la comunidad</p>
+</div>
+<div class="flex items-center gap-3">
+<a class="text-xs font-semibold text-primary hover:text-primary-fixed transition-colors flex items-center gap-1 mr-2" href="#">
+                Explorar todas <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 items-start"><!-- Tarjeta 1: Transmutación: Cero -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md hover:shadow-2xl hover:scale-105 hover:z-20 flex flex-col cursor-pointer border border-outline-variant/40 hover:border-primary/40">
+  <div class="relative aspect-[2/3] w-full overflow-hidden">
+    <div class="bg-cover bg-center w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAU8GRgR_Rpjszfssg8bSqOC1JrNUsPDhxg0ufzVyK0nByT0DnsXS9a2SR93WXb9BXLCob4eD-gpGrI-G99BRa7COR_p2Tsf-xFyQriDto9Pj4D2lxHNQqGxOe0fw9T0two4KrEumNhCy0lyCl5l_J5gMP_cAWoXI8udKR2CzXhWjaweTAmZR9UuGOc4bJR67jfleVavdTC2UOPKCaq7xVyBDbk1kOUQBA94J1w6Ts');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+    <div class="absolute top-2 left-2">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-tertiary text-[10px] font-mono font-bold">4K</span>
+    </div>
+    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-xs">
+      <span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-bold text-[10px] uppercase">Ep. 12</span>
+      <span class="flex items-center gap-0.5 text-primary text-[11px] font-bold bg-surface-container-lowest/90 px-1.5 py-0.5 rounded">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.3
+      </span>
+    </div>
+    <!-- Overlay de Reproducción Rápida al Hover -->
+    <div class="absolute inset-0 bg-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary-container/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+        <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 flex flex-col flex-1">
+    <h3 class="font-headline font-semibold text-sm text-on-surface truncate group-hover:text-primary transition-colors">Transmutación: Cero</h3>
+    <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1">
+      <span class="">Fantasía Oscura</span>
+      <span class="">2024</span>
+    </div>
+    <!-- Contenido extendido desplegable en hover -->
+    <div class="max-h-0 opacity-0 group-hover:max-h-32 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden pt-0 group-hover:pt-2 group-hover:mt-2 border-t border-transparent group-hover:border-outline-variant/50">
+      <p class="text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed mb-2">
+        Alquimistas prohibidos desafían la transmutación del alma en un imperio en decadencia.
+      </p>
+      <div class="flex items-center gap-1.5">
+        <button class="flex-1 py-1 rounded bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs flex items-center justify-center gap-1 transition-colors" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+          <span class="">Ver Ahora</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors" title="Guardar" type="button">
+          <span class="material-symbols-outlined text-[14px]">bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tarjeta 2: Filo Carmesí: Sengoku -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md hover:shadow-2xl hover:scale-105 hover:z-20 flex flex-col cursor-pointer border border-outline-variant/40 hover:border-primary/40">
+  <div class="relative aspect-[2/3] w-full overflow-hidden">
+    <div class="bg-cover bg-center w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsPiuJIp_17ZzpEbJEeHdAwtkzmD-L0MZTpYNVwYzod8nF5zYZ2_hIvyqqFiBotsiXmGrAv3BuJv_OMopY9b36KJREAEsia2S5y3SC1QJAnwd7kKhRRfilNU-cY2UeACPH5ISYiX_x12auvmGrbzGI70aHP92iwrO5cQa8fB5v8u6f7H7yAhxEAM22kNurfkadyp7x8BzEbTzvJcUCvW2BjLrUKLV-_SD90tmU8uc');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+    <div class="absolute top-2 left-2">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-on-surface text-[10px] font-mono font-bold">HD</span>
+    </div>
+    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-xs">
+      <span class="px-1.5 py-0.5 rounded bg-tertiary-container text-tertiary-fixed font-bold text-[10px] uppercase">Final T1</span>
+      <span class="flex items-center gap-0.5 text-primary text-[11px] font-bold bg-surface-container-lowest/90 px-1.5 py-0.5 rounded">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.7
+      </span>
+    </div>
+    <div class="absolute inset-0 bg-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary-container/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+        <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 flex flex-col flex-1">
+    <h3 class="font-headline font-semibold text-sm text-on-surface truncate group-hover:text-primary transition-colors">Filo Carmesí: Sengoku</h3>
+    <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1">
+      <span class="">Acción Histórica</span>
+      <span class="">24 Eps</span>
+    </div>
+    <div class="max-h-0 opacity-0 group-hover:max-h-32 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden pt-0 group-hover:pt-2 group-hover:mt-2 border-t border-transparent group-hover:border-outline-variant/50">
+      <p class="text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed mb-2">
+        El filo ancestral despierta batallas sangrientas por el control total de las tierras feudales.
+      </p>
+      <div class="flex items-center gap-1.5">
+        <button class="flex-1 py-1 rounded bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs flex items-center justify-center gap-1 transition-colors" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+          <span class="">Ver Ahora</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors" title="Guardar" type="button">
+          <span class="material-symbols-outlined text-[14px]">bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tarjeta 3: Ciber-Sindicato 2099 (Normalizada con aspecto idéntico en reposo y detalles en hover) -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md hover:shadow-2xl hover:scale-105 hover:z-20 flex flex-col cursor-pointer border border-outline-variant/40 hover:border-primary/40">
+  <div class="relative aspect-[2/3] w-full overflow-hidden">
+    <div class="bg-cover bg-center w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_PTdONZNGc-EcOsfAPdOjzeeOLL6nv12oVlrp2LSBfj_hd8uhZ_J__WIgNoV2_rYh3rdI5aWNIYLIKl5EdG8R_gyk4GEZEK_7lyVR007Qzv4ZK7VO9TpWHd0lp4nfM6dC0Apktr0B3ynjZBIRlWSBcqBVdbGFMaKFNnKKSepNXWv6JIFUyQ3gNHvXLjePsAFasn3UTVC-m8Fo33sOYAd0ymoKMSD-9rGE6YbuWK8');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+    <div class="absolute top-2 left-2 flex items-center gap-1.5">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-tertiary text-[10px] font-mono font-bold">4K</span>
+      <span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[10px] font-bold font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-300">EN REPRODUCCIÓN</span>
+    </div>
+    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-xs">
+      <span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-bold text-[10px] uppercase">Ep. 8</span>
+      <span class="flex items-center gap-0.5 text-primary text-[11px] font-bold bg-surface-container-lowest/90 px-1.5 py-0.5 rounded">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.5
+      </span>
+    </div>
+    <div class="absolute inset-0 bg-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary-container/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+        <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 flex flex-col flex-1">
+    <h3 class="font-headline font-semibold text-sm text-on-surface truncate group-hover:text-primary transition-colors">Ciber-Sindicato 2099</h3>
+    <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1">
+      <span class="">Cyberpunk / Sci-Fi</span>
+      <span class="text-tertiary font-medium">98% Match</span>
+    </div>
+    <!-- Contenido extendido desplegable al hover con sinopsis y botones de acción -->
+    <div class="max-h-0 opacity-0 group-hover:max-h-36 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden pt-0 group-hover:pt-2 group-hover:mt-2 border-t border-transparent group-hover:border-outline-variant/50">
+      <p class="text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed mb-2">
+        Kael se infiltra en las bóvedas del Núcleo Negro antes de que expire su implante neural.
+      </p>
+      <div class="flex items-center gap-1.5">
+        <button class="flex-1 py-1 rounded bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs flex items-center justify-center gap-1 transition-colors" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+          <span class="">Ver Ahora</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-primary flex items-center justify-center transition-colors" title="Guardado" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">bookmark</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Me gusta" type="button">
+          <span class="material-symbols-outlined text-[14px]">thumb_up</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tarjeta 4: Titanis: El Despertar -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md hover:shadow-2xl hover:scale-105 hover:z-20 flex flex-col cursor-pointer border border-outline-variant/40 hover:border-primary/40">
+  <div class="relative aspect-[2/3] w-full overflow-hidden">
+    <div class="bg-cover bg-center w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBg9_mImePD_oZtMQJkUnbxk5EpuRaptP90erVsQnnIjp3v2R9zLbrGIv0xFWO_u-56JO2vQ9cXP0d7-NsnGpxdjj0FeQVdz77bf8w2N73aCMbzi5tROZNZic1wuyIJ6xiohJp-kZ0Sga1Y0PMtWkxit_Aq9_gSvU1lq1_OpvfvOBDduxlasANeZFBBkNBTyvCMMhYePBpAAjUDc9l1a44691JC2gGkeGMX_VZIdkQ');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+    <div class="absolute top-2 left-2">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-sm text-tertiary text-[10px] font-mono font-bold">4K</span>
+    </div>
+    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-xs">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface text-[10px] font-bold">Ep. 6</span>
+      <span class="flex items-center gap-0.5 text-primary text-[11px] font-bold bg-surface-container-lowest/90 px-1.5 py-0.5 rounded">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.1
+      </span>
+    </div>
+    <div class="absolute inset-0 bg-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary-container/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+        <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 flex flex-col flex-1">
+    <h3 class="font-headline font-semibold text-sm text-on-surface truncate group-hover:text-primary transition-colors">Titanis: El Despertar</h3>
+    <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1">
+      <span class="">Mecha / Supervivencia</span>
+      <span class="">12 Eps</span>
+    </div>
+    <div class="max-h-0 opacity-0 group-hover:max-h-32 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden pt-0 group-hover:pt-2 group-hover:mt-2 border-t border-transparent group-hover:border-outline-variant/50">
+      <p class="text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed mb-2">
+        Pilotos novatos enfrentan el asedio mecánico de los colosos del espacio exterior.
+      </p>
+      <div class="flex items-center gap-1.5">
+        <button class="flex-1 py-1 rounded bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs flex items-center justify-center gap-1 transition-colors" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+          <span class="">Ver Ahora</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors" title="Guardar" type="button">
+          <span class="material-symbols-outlined text-[14px]">bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tarjeta 5: Ecos del Vacío -->
+<div class="group relative rounded-lg overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md hover:shadow-2xl hover:scale-105 hover:z-20 flex flex-col cursor-pointer border border-outline-variant/40 hover:border-primary/40">
+  <div class="relative aspect-[2/3] w-full overflow-hidden">
+    <div class="bg-cover bg-center w-full h-full group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWWTrLc_MZEqkpXdojhnKevi5EtaDrTrmzVwh5EB1RPHH9NqPS_WUK4RxkwSZ7UR21dmhHDcWO-7I8OpjIWbhYoU5EJ1emK6IroultxbY6DM-F2w41NHEWRCf59IDjZJNnm7E4mGbPkNp1pN8T-XW5SoiM593_ioMZNNrGLigvdnN_1Fkb234b1dkwzmgP6PaWYnsT259Bw4PSukt8Cf2TXEWudyxuaZ5N4G4_IXA');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+    <div class="absolute top-2 left-2">
+      <span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary text-[10px] font-bold">NUEVO</span>
+    </div>
+    <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-xs">
+      <span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface text-[10px] font-bold">Ep. 1</span>
+      <span class="flex items-center gap-0.5 text-primary text-[11px] font-bold bg-surface-container-lowest/90 px-1.5 py-0.5 rounded">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.0
+      </span>
+    </div>
+    <div class="absolute inset-0 bg-surface/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary-container/30 scale-90 group-hover:scale-100 transition-transform duration-300">
+        <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 flex flex-col flex-1">
+    <h3 class="font-headline font-semibold text-sm text-on-surface truncate group-hover:text-primary transition-colors">Ecos del Vacío</h3>
+    <div class="flex items-center justify-between text-[11px] text-on-surface-variant mt-1">
+      <span class="">Fantasía Épica</span>
+      <span class="">Estreno</span>
+    </div>
+    <div class="max-h-0 opacity-0 group-hover:max-h-32 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden pt-0 group-hover:pt-2 group-hover:mt-2 border-t border-transparent group-hover:border-outline-variant/50">
+      <p class="text-[11px] text-on-surface-variant line-clamp-2 leading-relaxed mb-2">
+        Una orden de guardianes se adentra en el cosmos desierto para restaurar las estrellas extintas.
+      </p>
+      <div class="flex items-center gap-1.5">
+        <button class="flex-1 py-1 rounded bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs flex items-center justify-center gap-1 transition-colors" type="button">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+          <span class="">Ver Ahora</span>
+        </button>
+        <button class="w-7 h-7 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors" title="Guardar" type="button">
+          <span class="material-symbols-outlined text-[14px]">bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div></div>
+</section>
+<!-- SECCIÓN 2: LO MÁS VISTO EN KUROSTREAM HOY (TOP 10) -->
+<section class="space-y-4 pt-4">
+<div class="flex items-end justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary text-on-primary font-mono text-xs font-bold uppercase">Top 10</span>
+<h2 class="text-xl lg:text-2xl font-headline font-bold tracking-tight text-on-surface">Lo Más Visto en KuroStream Hoy</h2>
+</div>
+<p class="text-xs text-on-surface-variant mt-0.5">Actualizado cada hora según las horas de streaming en la plataforma</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Top 1 Card -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container p-3 flex gap-3.5 hover:bg-surface-container-high transition-all cursor-pointer shadow-md border border-outline-variant/40">
+<div class="relative w-28 aspect-[2/3] shrink-0 rounded-lg overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-300" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCJZc7Ct4Fn4_Mr2Y02fanC0vMnWQFcbX-MGE6UFi-107EUIf0O29OdTZ8Iwf18R_g795MJLkqtINtoS6KHhI7Brzb8oZOrGbCBvBWERqijVasXHxHa6zb2vu3tiDqQpKoD2bbH_y3JH61E4AKR-tkMlBpOL63I7O7vt2CM6pIKs_GcwYgCJS32L4nbVbEKFk8rn4K2ivn_5rGJYhOpF9u99WPEY9faF_KAB83M_yw&quot;);"></div>
+<span class="absolute top-1 left-1 px-1 py-0.2 bg-primary text-on-primary font-mono font-bold text-[9px] rounded">TOP 1</span>
+</div>
+<div class="flex flex-col justify-between py-1 min-w-0">
+<div>
+<span class="text-3xl font-headline font-extrabold text-outline/40 leading-none -ml-1 select-none">#01</span>
+<h3 class="font-headline font-bold text-sm text-on-surface truncate group-hover:text-primary transition-colors mt-0.5">Nebulosa Negra</h3>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">Crímenes interdimensionales en una estación orbital sin gravedad ni ley.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 text-primary text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.8
+                  </div>
+<span class="text-[11px] text-tertiary font-mono">1.4M views</span>
+</div>
+</div>
+</div>
+<!-- Top 2 Card -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container p-3 flex gap-3.5 hover:bg-surface-container-high transition-all cursor-pointer shadow-md border border-outline-variant/40">
+<div class="relative w-28 aspect-[2/3] shrink-0 rounded-lg overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-300" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDLXEzo7DKFTYEF7td3gpnQbcvdgwBeBcKQ5sGoQhAfbi9GQrXCrMwbtLqgX0wehDFNwNBblsTPNyI5ed3r7XFJE3Nle81yf_UCyWV-6PrgDPBeTyMT7pnmINGE2fJTdW4doqQvYvTOiVyYqJ-5Se1uXl55-R4IKrbhzT_vCs40mPXCBk8VPvwt0vC8FF3OiqOpQ8E3e9rLnqeR3H13XBwg6zdWVFS2MyaoXaCuW5c&quot;);"></div>
+<span class="absolute top-1 left-1 px-1 py-0.2 bg-surface-container-highest text-on-surface font-mono font-bold text-[9px] rounded">TOP 2</span>
+</div>
+<div class="flex flex-col justify-between py-1 min-w-0">
+<div>
+<span class="text-3xl font-headline font-extrabold text-outline/40 leading-none -ml-1 select-none">#02</span>
+<h3 class="font-headline font-bold text-sm text-on-surface truncate group-hover:text-primary transition-colors mt-0.5">Velo del Shogun</h3>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">La orden secreta que protege al inframundo de las criaturas de pesadilla.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 text-primary text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.5
+                  </div>
+<span class="text-[11px] text-tertiary font-mono">980k views</span>
+</div>
+</div>
+</div>
+<!-- Top 3 Card -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container p-3 flex gap-3.5 hover:bg-surface-container-high transition-all cursor-pointer shadow-md border border-outline-variant/40">
+<div class="relative w-28 aspect-[2/3] shrink-0 rounded-lg overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-300" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCsSzqtwE98N2u7qzgJxwYubz3goHK1urMq82EC4ty4e2VE5ci_VgsnyEyVRwnXpLISxccdtVIWj5qkRas8svVydvZj9-zQImNdrlAGHL-ZlqzE0cR7s0PZh9JvjlhB4DzF7hppemvKTt4yGcBtjgl0_7FvS1J6e1LO87znIUi6dZeIoLXjCqrOSIjlWAKDpwoQ6oWxndLuX2Q6XS6tJ06gqUS0pmdIgotDkFe9EG4&quot;);"></div>
+<span class="absolute top-1 left-1 px-1 py-0.2 bg-surface-container-highest text-on-surface font-mono font-bold text-[9px] rounded">TOP 3</span>
+</div>
+<div class="flex flex-col justify-between py-1 min-w-0">
+<div>
+<span class="text-3xl font-headline font-extrabold text-outline/40 leading-none -ml-1 select-none">#03</span>
+<h3 class="font-headline font-bold text-sm text-on-surface truncate group-hover:text-primary transition-colors mt-0.5">Redline: Infinito</h3>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">Carreras clandestinas donde la apuesta máxima es el alma del piloto.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 text-primary text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.4
+                  </div>
+<span class="text-[11px] text-tertiary font-mono">820k views</span>
+</div>
+</div>
+</div>
+<!-- Top 4 Card -->
+<div class="group relative rounded-xl overflow-hidden bg-surface-container p-3 flex gap-3.5 hover:bg-surface-container-high transition-all cursor-pointer shadow-md border border-outline-variant/40">
+<div class="relative w-28 aspect-[2/3] shrink-0 rounded-lg overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-300" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBpNu1hsd7dPCI20HsuPJpiBtWI2fNUdHD-Q04X_1sxe6mM83YFS_UhLPEZV8blFX_oX72v67aWJ9hECQEA23qlS7mmlUMY4UQtpB_g8eXBnFFqHuvMa1wXcSKsJAbFYsm5_31Ck433LbVL85M2PkVQ-Hb57qOvNcJBzHZq6gluD42N-3beg4HutAm77N_Z3Brz4qGNmnaLzNGBKrzgLvF8ECndyx-cJxoURKx0jYQ&quot;);"></div>
+<span class="absolute top-1 left-1 px-1 py-0.2 bg-surface-container-highest text-on-surface font-mono font-bold text-[9px] rounded">TOP 4</span>
+</div>
+<div class="flex flex-col justify-between py-1 min-w-0">
+<div>
+<span class="text-3xl font-headline font-extrabold text-outline/40 leading-none -ml-1 select-none">#04</span>
+<h3 class="font-headline font-bold text-sm text-on-surface truncate group-hover:text-primary transition-colors mt-0.5">Draco: Génesis</h3>
+<p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">Cuando la biotecnología despierta el ADN de las bestias mitológicas extintas.</p>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1 text-primary text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: &quot;FILL&quot; 1;">star</span> 9.2
+                  </div>
+<span class="text-[11px] text-tertiary font-mono">750k views</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 3: SIMULCASTS DE LA SEMANA (FORMATO EPISODIOS 16:9) -->
+<section class="space-y-4 pt-4">
+<div class="flex items-end justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[22px]">schedule</span>
+<h2 class="text-xl lg:text-2xl font-headline font-bold tracking-tight text-on-surface">Simulcasts de la Semana</h2>
+</div>
+<p class="text-xs text-on-surface-variant mt-0.5">Episodios emitidos en directo sincronizados con su estreno en Japón</p>
+</div>
+<div class="flex items-center gap-2">
+<div class="hidden sm:flex items-center bg-surface-container rounded-lg p-1 text-xs font-medium mr-2 border border-outline-variant/40">
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface">Hoy (Jueves)</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">Viernes</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">Sábado</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">Domingo</button>
+</div>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<!-- Episodio 1 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md flex flex-col cursor-pointer border border-outline-variant/40">
+<div class="relative aspect-video w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCjrOm2SnB27hGDuUrCVUlLNAvwrLlVA64ut_Bj4QF4s7bSMhWMhzldaOCkUcT9jNnG0zswAbbWbRHraxmuAlmWssIt6qRmzKMR1-VvlNtuSTC44A7m_azq-LrAKrRjRA12woEsjxzI1TuIJXUhHhLlxzOkQcLQKNNBwJT-hWP6rz7vY0Ot_J5jLhnOr-T8FoouDuwzpGvoFDjRgAgrhnf4a87akMzdIwzzSh7EB9c&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-70"></div>
+<div class="absolute top-2.5 left-2.5">
+<span class="px-2 py-0.5 rounded bg-tertiary-container text-tertiary-fixed text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+                    Emisión Hoy 19:30
+                  </span>
+</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/90 text-on-surface text-[10px] font-mono">
+                  24:15 min
+                </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xl scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-xs text-primary font-medium mb-1">
+<span class="">Torneo del Abismo</span>
+<span class="font-mono text-on-surface-variant">T1 : E14</span>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                  "El Rompimiento del Cuarto Sello"
+                </h3>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1">
+                  Kurogami libera su técnica prohibida ante el general de la legión sombría.
+                </p>
+</div>
+</div>
+<!-- Episodio 2 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md flex flex-col cursor-pointer border border-outline-variant/40">
+<div class="relative aspect-video w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDfBljQNwDQ1khNEXC5MRJp8ceXSanEw6oGwneoX9NVvZPtoa2riLzwKQ-ezVpBq58QkKuOAoRjbD1X9Iat52ZkWGp_ZLKaMcpWqTCwkRzJbIRc4Xf7WR_HUNcXXZZvJu5jrc_sjqkHoL6jtLrLCmhaag8Pqjt0sGTx1ccvV2iBSya34B7XQq-Mu1Sz9TTUAikNPuYC9U01dNmM-h_XGWq4inhaUnC6P0gyGWF-uUk&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-70"></div>
+<div class="absolute top-2.5 left-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">
+                    Hoy 21:00
+                  </span>
+</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/90 text-on-surface text-[10px] font-mono">
+                  23:40 min
+                </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xl scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-xs text-primary font-medium mb-1">
+<span class="">Boticaria de Medianoche</span>
+<span class="font-mono text-on-surface-variant">T2 : E04</span>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                  "El Antídoto de Flores Fantasma"
+                </h3>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1">
+                  Una petición urgente desde el palacio real pone en jaque la botica secreta.
+                </p>
+</div>
+</div>
+<!-- Episodio 3 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md flex flex-col cursor-pointer border border-outline-variant/40">
+<div class="relative aspect-video w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBTL0pCDuvSTNLVff7Tvpe91EUDN9X_A6YJkmwy7cbJ2x42onf1q1OzIpnwZgIjcDOsAgh0ZGWTOyYCKGtYVFvUPyxXpUQ9cryrXnzh7e9qIVpixBzIsZLSfv6G9X6q7INCvs-_R_0lal829PVpKkX1rlM6fx2NXVDLesl3EznfoRcn2c75Bjq_xYZgTK5UQKCSasDqBjrP44Jar443cZGiq6_YF74_rhKLt6Q-AVE&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-70"></div>
+<div class="absolute top-2.5 left-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">
+                    Hoy 22:15
+                  </span>
+</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/90 text-on-surface text-[10px] font-mono">
+                  25:02 min
+                </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xl scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-xs text-primary font-medium mb-1">
+<span class="">Protocolo Cero</span>
+<span class="font-mono text-on-surface-variant">T1 : E09</span>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                  "Furia en el Sector 7"
+                </h3>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1">
+                  El contraataque contra los drones no tripulados cobra un precio inesperado.
+                </p>
+</div>
+</div>
+<!-- Episodio 4 -->
+<div class="group rounded-xl overflow-hidden bg-surface-container hover:bg-surface-container-high transition-all duration-300 shadow-md flex flex-col cursor-pointer border border-outline-variant/40">
+<div class="relative aspect-video w-full overflow-hidden">
+<div class="bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-500" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDMDcRmBZL9G-p2gPrMPGX5uQBQQFhGy-evetEOdFxNt7G5lDK2VpU4clXxPfz2Uf8l2Q-oWZZWRHxmQaRiteiKevpSPrmEEKajeHgeBKLiB3KjeDJOJZ21vi3ogQkl58TgkOrIMi_oVeCtlOAliKlWvwaPmf8kfdXWj8liSPlUFQ9Lghnosf9QfpewsO9_PqngbB1kMWkhOVJIoQ6JoswA67VocxMEELszLrsmZH8&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent opacity-70"></div>
+<div class="absolute top-2.5 left-2.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">
+                    Hoy 23:30
+                  </span>
+</div>
+<div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/90 text-on-surface text-[10px] font-mono">
+                  24:00 min
+                </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xl scale-90 group-hover:scale-100 transition-transform">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: &quot;FILL&quot; 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-3.5 flex flex-col flex-1">
+<div class="flex items-center justify-between text-xs text-primary font-medium mb-1">
+<span class="">Grimorio de Cenizas</span>
+<span class="font-mono text-on-surface-variant">T3 : E02</span>
+</div>
+<h3 class="font-headline font-bold text-sm text-on-surface group-hover:text-primary transition-colors line-clamp-1">
+                  "El Susurro de las Cavernas"
+                </h3>
+<p class="text-xs text-on-surface-variant line-clamp-2 mt-1">
+                  Aventureros veteranos descubren una reliquia anterior a la caída del imperio.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECCIÓN 4: WATCH PARTY / COMUNIDAD -->
+<div class="relative rounded-2xl overflow-hidden bg-surface-container p-6 lg:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8 border border-outline-variant/60">
+<div class="relative z-10 max-w-xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="text-xs font-mono font-bold uppercase tracking-wider text-error">Watch Party Oficial</span>
+</div>
+<h3 class="text-2xl lg:text-3xl font-headline font-extrabold text-on-surface mb-3 tracking-tight">
+              Transmisión Comunitaria: Final de Temporada con Creadores
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Únete al chat en vivo y comenta el desenlace de la serie revelación junto al elenco de doblaje y el director de animación. Audio sin comprimir y subtítulos en 8 idiomas.
+            </p>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-fixed text-on-primary font-semibold text-xs tracking-wide flex items-center gap-2 shadow-md transition-all cursor-pointer" type="button">
+<span class="material-symbols-outlined text-[18px]">group</span>
+                Reservar Asiento en la Sala
+              </button>
+<span class="text-xs text-secondary font-mono">14,280 usuarios registrados</span>
+</div>
+</div>
+<div class="relative z-10 w-full lg:w-72 flex flex-col gap-2 p-4 rounded-xl bg-surface-container-low border border-outline-variant/40 shadow-inner">
+<div class="text-xs font-semibold text-on-surface mb-1 flex items-center justify-between">
+<span class="">Servidor Ultra-Baja Latencia</span>
+<span class="text-tertiary font-mono">24ms</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[88%] rounded-full"></div>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant mt-1">
+<span class="">Capacidad Nodo Europa</span>
+<span class="font-mono text-on-surface">88% Óptimo</span>
+</div>
+</div>
+</div>
+</div>
+</div></main>
+<!-- ==================== FOOTER ==================== -->
+<footer class="w-full bg-surface-container-low border-t border-outline-variant py-12 transition-colors duration-300">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
+<div class="col-span-2">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[16px] font-bold">bolt</span>
+</div>
+<span class="font-headline font-bold text-sm tracking-tight text-on-surface">KURO<span class="text-primary">STREAM</span></span>
+</div>
+<p class="text-xs text-on-surface-variant max-w-sm leading-relaxed mb-4">
+            Plataforma de alta fidelidad para streaming de series de televisión, anime simultáneo y novedades globales sin publicidad abusiva.
+          </p>
+<div class="text-xs text-secondary font-mono">© 2024 KuroStream Labs Inc. Todos los derechos reservados.</div>
+</div>
+<div>
+<div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Navegación</div>
+<ul class="space-y-2 text-xs text-on-surface-variant">
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Novedades</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Popular</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Simulcast</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Mi Lista de Favoritos</a></li>
+</ul>
+</div>
+<div>
+<div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Explorar</div>
+<ul class="space-y-2 text-xs text-on-surface-variant">
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Juegos Web</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Tienda Oficial</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Noticias &amp; Prensa</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Calendario de Estrenos</a></li>
+</ul>
+</div>
+<div>
+<div class="text-xs font-semibold uppercase tracking-wider text-on-surface mb-3">Legal &amp; Ayuda</div>
+<ul class="space-y-2 text-xs text-on-surface-variant">
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Términos de Servicio</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Política de Privacidad</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Centro de Ayuda</a></li>
+<li class=""><a class="hover:text-on-surface transition-colors" href="#">Contacto Comercial</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-secondary">
+<div class="">Diseñado para amantes de la animación japonesa y cine de culto. Transmisión nativa H.265 / AV1.</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>Servidores Operativos 99.98%
+          </span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Script para alternancia funcional del tema Modo Claro / Modo Oscuro -->
+<script>
+  (function() {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+    const root = document.documentElement;
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        root.classList.add('dark');
+        if (sunIcon) sunIcon.classList.remove('hidden');
+        if (moonIcon) moonIcon.classList.add('hidden');
+        if (themeBtn) themeBtn.setAttribute('title', 'Cambiar a modo claro');
+      } else {
+        root.classList.remove('dark');
+        if (sunIcon) sunIcon.classList.add('hidden');
+        if (moonIcon) moonIcon.classList.remove('hidden');
+        if (themeBtn) themeBtn.setAttribute('title', 'Cambiar a modo oscuro');
+      }
+    }
+
+    // Inicializar sincronizado con la clase del root
+    const currentIsDark = root.classList.contains('dark');
+    applyTheme(currentIsDark);
+
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const nextState = !root.classList.contains('dark');
+        applyTheme(nextState);
+      });
+    }
+  })();
+</script>
+
+
+</body></html>
