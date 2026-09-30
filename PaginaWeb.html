@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador en Tiempo Real</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:#292c2b;
+    background-image:linear-gradient(rgba(224,221,186,.2),rgba(224,221,186,.2)),url("./fondo2.jpg");
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    background-attachment:fixed;
+}
+
+.barra-superior{
+    width:100%;
+    height:58px;
+    padding:0 22px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    z-index:100;
+    border-bottom:1px solid rgba(0,0,0,.1);
+    background:rgba(224,221,186,.6);
+    backdrop-filter:blur(10px);
+}
+
+.marca{flex:1}
+
+.titulo h1{
+    margin:0;
+    font-family:Georgia,serif;
+    font-size:18px;
+}
+
+.titulo p{
+    margin:4px 0 0;
+    font-family:monospace;
+    font-size:9px;
+    letter-spacing:1px;
+    color:#686b63;
+}
+
+.consola{
+    margin-right:25px;
+    font-size:14px;
+}
+
+.acciones{
+    display:flex;
+    gap:8px;
+}
+
+.icono{
+    width:37px;
+    height:37px;
+    border:0;
+    border-radius:9px;
+    background:#191c28;
+    color:#e5e7eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.icono svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.icono:hover{
+    background:#303443;
+    transform:translateY(-2px);
+}
+
+.contenedor{
+    width:min(850px,92%);
+    margin:55px auto 40px;
+}
+
+.tarjeta{
+    border:1px solid rgba(40,43,39,.15);
+    border-radius:20px;
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(12px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+.contador{
+    padding:30px;
+    text-align:center;
+}
+
+.encabezado{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.etiqueta{
+    display:block;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#686b63;
+}
+
+.encabezado h2{
+    margin:7px 0 0;
+    font-family:Georgia,serif;
+    font-size:25px;
+}
+
+.estado{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    font-size:10px;
+    letter-spacing:1px;
+    color:#59634e;
+}
+
+.punto{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#65a30d;
+    animation:pulso 1.8s infinite;
+}
+
+@keyframes pulso{
+    0%{box-shadow:0 0 0 0 rgba(101,163,13,.35)}
+    70%{box-shadow:0 0 0 7px rgba(101,163,13,0)}
+    100%{box-shadow:0 0 0 0 rgba(101,163,13,0)}
+}
+
+.numero{
+    margin:30px 0;
+    font-family:Georgia,serif;
+    font-size:110px;
+    line-height:1;
+    font-weight:bold;
+    transition:transform .15s;
+}
+
+.numero.animar{transform:scale(1.08)}
+
+.botones{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.boton{
+    width:145px;
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    cursor:pointer;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    transition:.2s;
+}
+
+.boton span{
+    font-size:25px;
+    line-height:1;
+}
+
+.boton small{font-size:13px}
+
+.boton-menos{background:#4b4e4b}
+.boton-mas{background:#191c28}
+
+.boton:hover{
+    transform:translateY(-2px);
+    box-shadow:0 7px 15px rgba(0,0,0,.15);
+}
+
+.boton:active{transform:scale(.96)}
+
+.mensaje{
+    margin-top:18px;
+    font-size:13px;
+    color:#686b63;
+}
+
+.estadisticas{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.estadistica{
+    padding:22px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.icono-estadistica{
+    width:48px;
+    height:48px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hombre .icono-estadistica{
+    background:rgba(63,99,216,.13);
+    color:#3f63d8;
+}
+
+.mujer .icono-estadistica{
+    background:rgba(198,93,138,.13);
+    color:#c65d8a;
+}
+
+.icono-estadistica svg{
+    width:25px;
+    height:25px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.datos{flex:1}
+
+.datos span{
+    display:block;
+    font-size:12px;
+    color:#686b63;
+}
+
+.datos strong{
+    display:block;
+    margin-top:4px;
+    font-size:28px;
+}
+
+.boton-genero{
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:8px;
+    background:#191c28;
+    color:white;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.boton-genero:hover{
+    transform:scale(1.08);
+    background:#303443;
+}
+
+.menos-genero{background:#777b75}
+
+.informacion{
+    margin-top:18px;
+    padding:22px;
+}
+
+.info-titulo{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    font-size:13px;
+}
+
+.info-titulo strong{font-size:14px}
+
+.barra{
+    width:100%;
+    height:12px;
+    display:flex;
+    overflow:hidden;
+    border-radius:20px;
+    background:#d4d3c8;
+}
+
+.barra-hombres{
+    width:0%;
+    background:#3f63d8;
+    transition:.4s;
+}
+
+.barra-mujeres{
+    width:0%;
+    background:#c65d8a;
+    transition:.4s;
+}
+
+.leyenda{
+    margin-top:13px;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    font-size:11px;
+    color:#686b63;
+}
+
+.leyenda span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.circulo{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+}
+
+.hombre-color{background:#3f63d8}
+.mujer-color{background:#c65d8a}
+
+.reiniciar{
+    margin:20px auto 0;
+    padding:11px 18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid rgba(0,0,0,.15);
+    border-radius:10px;
+    background:rgba(255,255,255,.55);
+    color:#292c2b;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.reiniciar svg{
+    width:16px;
+    height:16px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.reiniciar:hover{
+    background:#191c28;
+    color:white;
+}
+
+.notificacion{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    padding:13px 18px;
+    border-radius:10px;
+    background:#191c28;
+    color:white;
+    font-size:12px;
+    opacity:0;
+    transform:translateY(15px);
+    pointer-events:none;
+    transition:.3s;
+}
+
+.notificacion.mostrar{
+    opacity:1;
+    transform:translateY(0);
+}
+
+body.oscuro{
+    color:#eee;
+    background-color:#11131a;
+    background-blend-mode:multiply;
+}
+
+body.oscuro .barra-superior{
+    background:rgba(20,22,30,.78);
+}
+
+body.oscuro .reiniciar{
+    background:rgba(30,33,43,.8);
+    color:#eee;
+}
+
+body.oscuro .barra{background:#333640}
+
+@media(max-width:650px){
+    .barra-superior{padding:0 12px}
+    .consola{display:none}
+    .titulo h1{font-size:15px}
+    .titulo p{font-size:7px}
+    .contenedor{margin-top:30px}
+    .numero{font-size:80px}
+    .estadisticas{grid-template-columns:1fr}
+    .boton{width:125px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="barra-superior">
+    <div class="marca">
+        <div class="titulo">
+            <h1>Contador en Tiempo Real</h1>
+            <p>TELEMETRY PULSE STATION</p>
+        </div>
+    </div>
+
+    <div class="consola">Consola Telemetría</div>
+
+    <div class="acciones">
+        <button class="icono" id="tema" title="Cambiar tema">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+            </svg>
+        </button>
+
+        <button class="icono" id="compartir" title="Compartir">
+            <svg viewBox="0 0 24 24">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <path d="m8.7 10.5 6.6-4M8.7 13.5l6.6 4"></path>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<main class="contenedor">
+
+    <section class="tarjeta contador">
+        <div class="encabezado">
+            <div>
+                <span class="etiqueta">PERSONAS PRESENTES</span>
+                <h2 id="textoPersonas">0 Personas</h2>
+            </div>
+
+            <div class="estado">
+                <span class="punto"></span>
+                EN DIRECTO
+            </div>
+        </div>
+
+        <div class="numero" id="contador">0</div>
+
+        <div class="botones">
+            <button class="boton boton-menos" id="menos">
+                <span>−</span>
+                <small>Eliminar</small>
+            </button>
+
+            <button class="boton boton-mas" id="mas">
+                <span>+</span>
+                <small>Añadir</small>
+            </button>
+        </div>
+
+        <div class="mensaje" id="mensaje">No hay personas registradas</div>
+    </section>
+
+    <section class="estadisticas">
+
+        <div class="tarjeta estadistica hombre">
+            <div class="icono-estadistica">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="10" cy="8" r="4"></circle>
+                    <path d="M3 21c0-4 3-7 7-7s7 3 7 7M17 3h4v4M21 3l-6 6"></path>
+                </svg>
+            </div>
+
+            <div class="datos">
+                <span>Hombres</span>
+                <strong id="hombres">0</strong>
+            </div>
+
+            <button class="boton-genero" id="masHombre">+1</button>
+            <button class="boton-genero menos-genero" id="menosHombre">−1</button>
+        </div>
+
+        <div class="tarjeta estadistica mujer">
+            <div class="icono-estadistica">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M12 11v10M8 17h8M12 21v2"></path>
+                </svg>
+            </div>
+
+            <div class="datos">
+                <span>Mujeres</span>
+                <strong id="mujeres">0</strong>
+            </div>
+
+            <button class="boton-genero" id="masMujer">+1</button>
+            <button class="boton-genero menos-genero" id="menosMujer">−1</button>
+        </div>
+
+    </section>
+
+    <section class="tarjeta informacion">
+        <div class="info-titulo">
+            <span>Distribución</span>
+            <strong id="porcentaje">0%</strong>
+        </div>
+
+        <div class="barra">
+            <div class="barra-hombres" id="barraHombres"></div>
+            <div class="barra-mujeres" id="barraMujeres"></div>
+        </div>
+
+        <div class="leyenda">
+            <span><i class="circulo hombre-color"></i>Hombres</span>
+            <span><i class="circulo mujer-color"></i>Mujeres</span>
+        </div>
+    </section>
+
+    <button class="reiniciar" id="reiniciar">
+        <svg viewBox="0 0 24 24">
+            <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+            <path d="M3 4v6h6"></path>
+        </svg>
+        Reiniciar contador
+    </button>
+
+</main>
+
+<div class="notificacion" id="notificacion"></div>
+
+<script>
+let personas=0,hombres=0,mujeres=0;
+
+const contador=document.getElementById("contador");
+const textoPersonas=document.getElementById("textoPersonas");
+const mensaje=document.getElementById("mensaje");
+const hombresTexto=document.getElementById("hombres");
+const mujeresTexto=document.getElementById("mujeres");
+const barraHombres=document.getElementById("barraHombres");
+const barraMujeres=document.getElementById("barraMujeres");
+const porcentaje=document.getElementById("porcentaje");
+const notificacion=document.getElementById("notificacion");
+
+function actualizar(){
+    contador.textContent=personas;
+    textoPersonas.textContent=personas==1?"1 Persona":personas+" Personas";
+
+    if(personas==0){
+        mensaje.textContent="No hay personas registradas";
+    }else if(personas==1){
+        mensaje.textContent="Hay una persona registrada";
+    }else{
+        mensaje.textContent="Hay "+personas+" personas registradas";
+    }
+
+    hombresTexto.textContent=hombres;
+    mujeresTexto.textContent=mujeres;
+
+    if(personas>0){
+        let h=hombres/personas*100;
+        let m=mujeres/personas*100;
+
+        barraHombres.style.width=h+"%";
+        barraMujeres.style.width=m+"%";
+        porcentaje.textContent=Math.round(h)+"% / "+Math.round(m)+"%";
+    }else{
+        barraHombres.style.width="0%";
+        barraMujeres.style.width="0%";
+        porcentaje.textContent="0%";
+    }
+
+    contador.classList.add("animar");
+
+    setTimeout(function(){
+        contador.classList.remove("animar");
+    },150);
+
+    guardarDatos();
+}
+
+function mostrarNotificacion(texto){
+    notificacion.textContent=texto;
+    notificacion.classList.add("mostrar");
+
+    setTimeout(function(){
+        notificacion.classList.remove("mostrar");
+    },1800);
+}
+
+function guardarDatos(){
+    localStorage.setItem("personas",personas);
+    localStorage.setItem("hombres",hombres);
+    localStorage.setItem("mujeres",mujeres);
+}
+
+function cargarDatos(){
+    personas=Number(localStorage.getItem("personas"))||0;
+    hombres=Number(localStorage.getItem("hombres"))||0;
+    mujeres=Number(localStorage.getItem("mujeres"))||0;
+
+    if(hombres+mujeres>personas){
+        hombres=0;
+        mujeres=0;
+    }
+
+    actualizar();
+}
+
+document.getElementById("mas").onclick=function(){
+    personas++;
+    actualizar();
+    mostrarNotificacion("Persona añadida");
+};
+
+document.getElementById("menos").onclick=function(){
+    if(personas>0){
+        personas--;
+
+        if(hombres+mujeres>personas){
+            if(mujeres>hombres){
+                mujeres--;
+            }else{
+                hombres--;
+            }
+        }
+
+        actualizar();
+        mostrarNotificacion("Persona eliminada");
+    }else{
+        mostrarNotificacion("El contador ya está en 0");
+    }
+};
+
+document.getElementById("masHombre").onclick=function(){
+    if(hombres+mujeres<personas){
+        hombres++;
+        actualizar();
+        mostrarNotificacion("Hombre añadido");
+    }else{
+        mostrarNotificacion("Primero añade una persona");
+    }
+};
+
+document.getElementById("menosHombre").onclick=function(){
+    if(hombres>0){
+        hombres--;
+        actualizar();
+        mostrarNotificacion("Hombre eliminado");
+    }
+};
+
+document.getElementById("masMujer").onclick=function(){
+    if(hombres+mujeres<personas){
+        mujeres++;
+        actualizar();
+        mostrarNotificacion("Mujer añadida");
+    }else{
+        mostrarNotificacion("Primero añade una persona");
+    }
+};
+
+document.getElementById("menosMujer").onclick=function(){
+    if(mujeres>0){
+        mujeres--;
+        actualizar();
+        mostrarNotificacion("Mujer eliminada");
+    }
+};
+
+document.getElementById("reiniciar").onclick=function(){
+    personas=0;
+    hombres=0;
+    mujeres=0;
+    actualizar();
+    mostrarNotificacion("Contador reiniciado");
+};
+
+document.getElementById("tema").onclick=function(){
+    document.body.classList.toggle("oscuro");
+};
+
+document.getElementById("compartir").onclick=function(){
+    let texto="Personas: "+personas+"\nHombres: "+hombres+"\nMujeres: "+mujeres;
+
+    if(navigator.share){
+        navigator.share({
+            title:"Contador en Tiempo Real",
+            text:texto
+        });
+    }else{
+        navigator.clipboard.writeText(texto);
+        mostrarNotificacion("Datos copiados");
+    }
+};
+
+cargarDatos();
+</script>
+
+</body>
+</html>
